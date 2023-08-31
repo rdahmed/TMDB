@@ -16,12 +16,12 @@ class DefaultNavigationController: UINavigationController {
     }
     
     private func setupAppearance() {
-        self.view.backgroundColor = .accentColor
+        self.view.backgroundColor = .white
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.shadowColor = .clear
-        appearance.backgroundColor = .accentColor
+        appearance.backgroundColor = .white
         
         self.navigationBar.standardAppearance = appearance
         self.navigationBar.scrollEdgeAppearance = appearance

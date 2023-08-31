@@ -8,6 +8,7 @@
 import UIKit
 
 class MainCoordinator {
+    
     let navigationController: UINavigationController
     
     init(window: UIWindow) {
@@ -17,5 +18,33 @@ class MainCoordinator {
         window.makeKeyAndVisible()
     }
     
-    func run() {}
+    func run() {
+        let viewModel = CategoriesMenuViewModel(router: self)
+        let viewController = CategoriesMenuViewController(viewModel: viewModel)
+                
+        self.navigationController.viewControllers = [viewController]
+    }
+    
+}
+
+// MARK: - CategoriesMenuRouter
+
+extension MainCoordinator: CategoriesMenuRouter {
+    
+    func showPopularMovies() {
+        // TODO: Route to popular movies list
+    }
+    
+    func showNowPlayingMovies() {
+        // TODO: Route to now playing movies list
+    }
+    
+    func showUpcomingMovies() {
+        // TODO: Route to upcoming movies list
+    }
+    
+    func showTopRatedMovies() {
+        // TODO: Route to top rated movies list
+    }
+    
 }
