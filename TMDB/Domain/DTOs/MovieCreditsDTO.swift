@@ -27,7 +27,7 @@ struct MovieCreditsDTO: Decodable {
 struct MovieCastMemberDTO: Decodable {
     let name: String
     let character: String
-    let profilePath: String
+    let profilePath: String?
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -40,6 +40,6 @@ struct MovieCastMemberDTO: Decodable {
         
         self.name = try container.decode(String.self, forKey: .name)
         self.character = try container.decode(String.self, forKey: .character)
-        self.profilePath = try container.decode(String.self, forKey: .profilePath)
+        self.profilePath = try container.decodeIfPresent(String.self, forKey: .profilePath)
     }
 }

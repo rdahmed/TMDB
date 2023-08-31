@@ -68,6 +68,7 @@ private extension NetworkService {
         request.httpBody = body
         request.addValue("Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNGYyYjE2M2Y2ZGEzZTM2NGUwM2JkM2E2OThhMDNmZCIsInN1YiI6IjY0ZTQ3NjQzZTg5NGE2MDBlNGU0NmM0ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._mtmSF0fc1UKMoBv31ays6uugHwB5ifohFc5w4L_Gvs", forHTTPHeaderField: "Authorization")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
 
         return request
     }
