@@ -1,5 +1,5 @@
 //
-//  MoviewRatingDTO.swift
+//  MovieRatingDTO.swift
 //  TMDB
 //
 //  Created by Radwa Ahmed on 31/08/2023.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MoviewRatingDTO: Decodable {
+struct MovieRatingDTO: Decodable {
     let statusCode: Int
     let statusMessage: String
     
