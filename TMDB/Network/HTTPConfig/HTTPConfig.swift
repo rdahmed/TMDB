@@ -21,7 +21,7 @@ enum HTTPConfig {
         
         switch environment {
         case .production:
-            return "https://api.themoviedb.org/3/movie"
+            return "https://api.themoviedb.org/3"
         }
         
     }

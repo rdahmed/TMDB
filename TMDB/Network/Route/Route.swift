@@ -12,8 +12,11 @@ enum Route {
     case getPopular
     case getTopRated
     case getUpcoming
+    case search
+    case getSimilar(id: String)
     case getDetails(id: String)
     case getReviews(id: String)
+    case getCredits(id: String)
     case addRating(id: String)
     case deleteRating(id: String)
 }
