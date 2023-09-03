@@ -18,4 +18,8 @@ extension MovieDetailsService {
     func getDetails(_ id: Int) -> MoviesPublisher<MovieDetailsDTO> {
         self.jsonTranspost.get(route: .getDetails(id: "\(id)"))
     }
+    
+    func getSimilar(to id: Int) -> MoviesPublisher<MoviesDTO> {
+        self.jsonTranspost.get(route: .getSimilar(id: "\(id)"))
+    }
 }

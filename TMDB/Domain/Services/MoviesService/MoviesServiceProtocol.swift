@@ -8,10 +8,9 @@
 import Foundation
 
 protocol MoviesServiceProtocol {
-    func getNowPlaying() -> MoviesPublisher<MoviesDTO>
-    func getPopular() -> MoviesPublisher<MoviesDTO>
-    func getTopRated() -> MoviesPublisher<MoviesDTO>
-    func getUpcoming() -> MoviesPublisher<MoviesDTO>
-    func getSimilar(to id: Int) -> MoviesPublisher<MoviesDTO>
-    func search(_ keyword: String) -> MoviesPublisher<MoviesDTO>
+    func getNowPlaying(_ page: Int) -> MoviesPublisher<MoviesDTO>
+    func getPopular(_ page: Int) -> MoviesPublisher<MoviesDTO>
+    func getTopRated(_ page: Int) -> MoviesPublisher<MoviesDTO>
+    func getUpcoming(_ page: Int) -> MoviesPublisher<MoviesDTO>
+    func search(_ keyword: String, page: Int) -> MoviesPublisher<MoviesDTO>
 }

@@ -12,7 +12,7 @@ class CategoriesMenuViewController: UIViewController {
     // MARK: - Constants
     
     private enum Constants {
-        static let cellId = "categoryCellId"
+        static let cellId: String = "categoryCellId"
     }
     
     // MARK: - Dependencies
@@ -43,9 +43,9 @@ class CategoriesMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setupViews()
         self.setupLayout()
         self.setupConstraints()
+        self.setupViews()
     }
     
 }
@@ -53,16 +53,6 @@ class CategoriesMenuViewController: UIViewController {
 // MARK: - UI Setup
 
 private extension CategoriesMenuViewController {
-    
-    func setupViews() {
-        self.tableView.backgroundColor = .clear
-        self.tableView.separatorStyle = .none
-        
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        
-        self.tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: Constants.cellId)
-    }
     
     func setupLayout() {
         self.view.addSubview(self.tableView)
@@ -76,6 +66,16 @@ private extension CategoriesMenuViewController {
             self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 40),
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -40)
         ])
+    }
+    
+    func setupViews() {
+        self.tableView.backgroundColor = .clear
+        self.tableView.separatorStyle = .none
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
+        self.tableView.register(CategoryTableViewCell.self, forCellReuseIdentifier: Constants.cellId)
     }
     
 }

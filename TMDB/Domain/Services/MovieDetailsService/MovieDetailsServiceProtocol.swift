@@ -9,4 +9,5 @@ import Foundation
 
 protocol MovieDetailsServiceProtocol {
     func getDetails(_ id: Int) -> MoviesPublisher<MovieDetailsDTO>
+    func getSimilar(to id: Int) -> MoviesPublisher<MoviesDTO>
 }

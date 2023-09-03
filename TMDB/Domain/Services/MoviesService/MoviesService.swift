@@ -15,27 +15,23 @@ class MoviesService: MoviesServiceProtocol {
 }
 
 extension MoviesService {
-    func getNowPlaying() -> MoviesPublisher<MoviesDTO> {
-        self.jsonTranspost.get(route: .getNowPlaying)
+    func getNowPlaying(_ page: Int) -> MoviesPublisher<MoviesDTO> {
+        self.jsonTranspost.get(route: .getNowPlaying, queryItems: ["page" : "\(page)"])
     }
     
-    func getPopular() -> MoviesPublisher<MoviesDTO> {
-        self.jsonTranspost.get(route: .getPopular)
+    func getPopular(_ page: Int) -> MoviesPublisher<MoviesDTO> {
+        self.jsonTranspost.get(route: .getPopular, queryItems: ["page" : "\(page)"])
     }
     
-    func getTopRated() -> MoviesPublisher<MoviesDTO> {
-        self.jsonTranspost.get(route: .getTopRated)
+    func getTopRated(_ page: Int) -> MoviesPublisher<MoviesDTO> {
+        self.jsonTranspost.get(route: .getTopRated, queryItems: ["page" : "\(page)"])
     }
     
-    func getUpcoming() -> MoviesPublisher<MoviesDTO> {
-        self.jsonTranspost.get(route: .getUpcoming)
+    func getUpcoming(_ page: Int) -> MoviesPublisher<MoviesDTO> {
+        self.jsonTranspost.get(route: .getUpcoming, queryItems: ["page" : "\(page)"])
     }
     
-    func getSimilar(to id: Int) -> MoviesPublisher<MoviesDTO> {
-        self.jsonTranspost.get(route: .getSimilar(id: "\(id)"))
-    }
-    
-    func search(_ keyword: String) -> MoviesPublisher<MoviesDTO> {
-        self.jsonTranspost.get(route: .search, queryItems: ["query": keyword])
+    func search(_ keyword: String, page: Int) -> MoviesPublisher<MoviesDTO> {
+        self.jsonTranspost.get(route: .search, queryItems: ["query": keyword, "page" : "\(page)"])
     }
 }

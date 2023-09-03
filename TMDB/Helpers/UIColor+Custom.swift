@@ -15,4 +15,5 @@ extension UIColor {
     static let userScorePositiveColor = UIColor(red: (31 / 255), green: (203 / 255), blue: (119 / 255), alpha: 1)
     static let userScoreNegativeColor = UIColor(red: (219 / 255), green: (35 / 255), blue: (96 / 255), alpha: 1)
     static let userScoreNeutralColor = UIColor(red: (210 / 255), green: (213 / 255), blue: (34 / 255), alpha: 1)
+    static let userScoreNoColor = UIColor.darkGray
 }

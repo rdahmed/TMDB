@@ -7,8 +7,6 @@
 
 import Foundation
 
-typealias MovieCast = [MovieCastMember]
-
 struct MovieCastMember {
     let name: String
     let character: String

@@ -33,7 +33,6 @@ struct MoviesDTO: Decodable {
 struct MovieDTO: Decodable {
     let id: Int
     let title: String
-    let overview: String
     let releaseDate: String
     let posterPath: String?
     let averageVote: Double?
@@ -41,7 +40,6 @@ struct MovieDTO: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case title
-        case overview
         case releaseDate = "release_date"
         case posterPath = "poster_path"
         case averageVote = "vote_average"
@@ -52,7 +50,6 @@ struct MovieDTO: Decodable {
         
         self.id = try container.decode(Int.self, forKey: .id)
         self.title = try container.decode(String.self, forKey: .title)
-        self.overview = try container.decode(String.self, forKey: .overview)
         self.releaseDate = try container.decode(String.self, forKey: .releaseDate)
         self.posterPath = try container.decodeIfPresent(String.self, forKey: .posterPath)
         self.averageVote = try container.decodeIfPresent(Double.self, forKey: .averageVote)

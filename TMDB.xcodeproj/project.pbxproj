@@ -56,6 +56,13 @@
 		D3D79B242AA0CFD400E5FD89 /* CategoriesMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D79B232AA0CFD400E5FD89 /* CategoriesMenuViewController.swift */; };
 		D3D79B272AA0FBA300E5FD89 /* MovieCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D79B262AA0FBA300E5FD89 /* MovieCategory.swift */; };
 		D3D79B2A2AA0FEB100E5FD89 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D79B292AA0FEB100E5FD89 /* CategoryTableViewCell.swift */; };
+		D3D79B2D2AA1EB1900E5FD89 /* MoviesListContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D79B2C2AA1EB1900E5FD89 /* MoviesListContracts.swift */; };
+		D3D79B2F2AA1EB3400E5FD89 /* MoviesListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D79B2E2AA1EB3400E5FD89 /* MoviesListRouter.swift */; };
+		D3D79B312AA1EB5000E5FD89 /* MoviesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D79B302AA1EB5000E5FD89 /* MoviesListViewModel.swift */; };
+		D3D79B332AA1EB7D00E5FD89 /* MoviesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D79B322AA1EB7D00E5FD89 /* MoviesListViewController.swift */; };
+		D3D79B362AA21BDE00E5FD89 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D79B352AA21BDE00E5FD89 /* MovieCollectionViewCell.swift */; };
+		D3D79B382AA2546A00E5FD89 /* UICollectionView+CellWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D79B372AA2546A00E5FD89 /* UICollectionView+CellWidth.swift */; };
+		D3D79B3A2AA38F7900E5FD89 /* UIView+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D79B392AA38F7900E5FD89 /* UIView+Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +136,13 @@
 		D3D79B232AA0CFD400E5FD89 /* CategoriesMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesMenuViewController.swift; sourceTree = "<group>"; };
 		D3D79B262AA0FBA300E5FD89 /* MovieCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCategory.swift; sourceTree = "<group>"; };
 		D3D79B292AA0FEB100E5FD89 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
+		D3D79B2C2AA1EB1900E5FD89 /* MoviesListContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListContracts.swift; sourceTree = "<group>"; };
+		D3D79B2E2AA1EB3400E5FD89 /* MoviesListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListRouter.swift; sourceTree = "<group>"; };
+		D3D79B302AA1EB5000E5FD89 /* MoviesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewModel.swift; sourceTree = "<group>"; };
+		D3D79B322AA1EB7D00E5FD89 /* MoviesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewController.swift; sourceTree = "<group>"; };
+		D3D79B352AA21BDE00E5FD89 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
+		D3D79B372AA2546A00E5FD89 /* UICollectionView+CellWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+CellWidth.swift"; sourceTree = "<group>"; };
+		D3D79B392AA38F7900E5FD89 /* UIView+Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utilities.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +265,7 @@
 				D3D79B142AA0B42400E5FD89 /* Coordinators */,
 				D3D79B172AA0B48F00E5FD89 /* NavigationControllers */,
 				D3D79B1C2AA0CF0D00E5FD89 /* CategoriesMenu */,
+				D3D79B2B2AA1EAF500E5FD89 /* MoviesList */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -319,6 +334,8 @@
 				D3D79AE02A9E086D00E5FD89 /* String+Utilities.swift */,
 				D3D79AE22A9E08A100E5FD89 /* Optional+Unwrapped.swift */,
 				D3D79B1A2AA0BE6B00E5FD89 /* UIColor+Custom.swift */,
+				D3D79B372AA2546A00E5FD89 /* UICollectionView+CellWidth.swift */,
+				D3D79B392AA38F7900E5FD89 /* UIView+Utilities.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -443,6 +460,26 @@
 			isa = PBXGroup;
 			children = (
 				D3D79B292AA0FEB100E5FD89 /* CategoryTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		D3D79B2B2AA1EAF500E5FD89 /* MoviesList */ = {
+			isa = PBXGroup;
+			children = (
+				D3D79B342AA21BBC00E5FD89 /* Cell */,
+				D3D79B2C2AA1EB1900E5FD89 /* MoviesListContracts.swift */,
+				D3D79B2E2AA1EB3400E5FD89 /* MoviesListRouter.swift */,
+				D3D79B302AA1EB5000E5FD89 /* MoviesListViewModel.swift */,
+				D3D79B322AA1EB7D00E5FD89 /* MoviesListViewController.swift */,
+			);
+			path = MoviesList;
+			sourceTree = "<group>";
+		};
+		D3D79B342AA21BBC00E5FD89 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D3D79B352AA21BDE00E5FD89 /* MovieCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -579,6 +616,8 @@
 			files = (
 				D3D79A922A9DEA1500E5FD89 /* TMDB.xcdatamodeld in Sources */,
 				D3D79ADA2A9E055F00E5FD89 /* NetworkServiceError.swift in Sources */,
+				D3D79B3A2AA38F7900E5FD89 /* UIView+Utilities.swift in Sources */,
+				D3D79B382AA2546A00E5FD89 /* UICollectionView+CellWidth.swift in Sources */,
 				D3D79AF32A9F8A9300E5FD89 /* MovieReview.swift in Sources */,
 				D3D79B242AA0CFD400E5FD89 /* CategoriesMenuViewController.swift in Sources */,
 				D3D79AE92A9E309700E5FD89 /* Movie.swift in Sources */,
@@ -587,6 +626,7 @@
 				D3D79AFF2AA0A7C900E5FD89 /* MoviesService.swift in Sources */,
 				D3D79AC62A9DF97200E5FD89 /* Route.swift in Sources */,
 				D3D79B0C2AA0AD3200E5FD89 /* MovieCreditsServiceProtocol.swift in Sources */,
+				D3D79B2D2AA1EB1900E5FD89 /* MoviesListContracts.swift in Sources */,
 				D3D79B202AA0CFAA00E5FD89 /* CategoriesMenuRouter.swift in Sources */,
 				D3D79B132AA0AEB700E5FD89 /* MovieRatingService.swift in Sources */,
 				D3D79AD62A9E018F00E5FD89 /* NetworkConstants.swift in Sources */,
@@ -599,12 +639,14 @@
 				D3D79B1E2AA0CF5200E5FD89 /* CategoriesMenuContracts.swift in Sources */,
 				D3D79B0E2AA0AD9200E5FD89 /* MovieCreditsService.swift in Sources */,
 				D3D79B072AA0AC3000E5FD89 /* MovieReviewsServiceProtocol.swift in Sources */,
+				D3D79B332AA1EB7D00E5FD89 /* MoviesListViewController.swift in Sources */,
 				D3D79AF52AA0961600E5FD89 /* MovieCreditsDTO.swift in Sources */,
 				D3D79AC82A9DFC6600E5FD89 /* Route+Path.swift in Sources */,
 				D3D79B222AA0CFBF00E5FD89 /* CategoriesMenuViewModel.swift in Sources */,
 				D3D79AD32A9E008500E5FD89 /* JSONTransportProtocol.swift in Sources */,
 				D3D79AD12A9E004200E5FD89 /* JSONTransportError.swift in Sources */,
 				D3D79B272AA0FBA300E5FD89 /* MovieCategory.swift in Sources */,
+				D3D79B2F2AA1EB3400E5FD89 /* MoviesListRouter.swift in Sources */,
 				D3D79AE32A9E08A100E5FD89 /* Optional+Unwrapped.swift in Sources */,
 				D3D79AF92AA09C2100E5FD89 /* MovieRatingDTO.swift in Sources */,
 				D3D79AE62A9E2D3200E5FD89 /* MoviesDTO.swift in Sources */,
@@ -615,10 +657,12 @@
 				D3D79AEF2A9F829100E5FD89 /* MovieReviewsDTO.swift in Sources */,
 				D3D79AFD2AA0A53D00E5FD89 /* MoviesServiceProtocol.swift in Sources */,
 				D3D79AF72AA09A4900E5FD89 /* MovieCastMember.swift in Sources */,
+				D3D79B312AA1EB5000E5FD89 /* MoviesListViewModel.swift in Sources */,
 				D3D79A882A9DEA1500E5FD89 /* AppDelegate.swift in Sources */,
 				D3D79B2A2AA0FEB100E5FD89 /* CategoryTableViewCell.swift in Sources */,
 				D3D79B042AA0AB1E00E5FD89 /* MovieDetailsService.swift in Sources */,
 				D3D79ACE2A9DFF8300E5FD89 /* HTTPConfig.swift in Sources */,
+				D3D79B362AA21BDE00E5FD89 /* MovieCollectionViewCell.swift in Sources */,
 				D3D79ADC2A9E06E700E5FD89 /* NetworkServiceProtocol.swift in Sources */,
 				D3D79A8A2A9DEA1500E5FD89 /* SceneDelegate.swift in Sources */,
 			);

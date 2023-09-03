@@ -7,8 +7,6 @@
 
 import Foundation
 
-typealias MovieReviews = [MovieReview]
-
 struct MovieReview {
     let id: String
     let authorName: String

@@ -15,8 +15,8 @@ struct MovieDetails {
     let duration: Int
     let overview: String
     let ratingAsAdults: Bool
-    let posterURL: String?
-    let backdropURL: String?
+    let posterData: Data?
+    let backdropData: Data?
     let noOfVotes: Int?
     let averageVote: Double?
     let status: String?
@@ -31,15 +31,21 @@ struct MovieDetails {
         self.duration = dto.duration
         self.overview = dto.overview
         self.ratingAsAdults = dto.ratingAsAdults
-        if let posterPath = dto.posterPath {
-            self.posterURL = HTTPConfig.imageBaseURL + posterPath
+        if let posterPath = dto.posterPath,
+           let posterURL = URL(string: HTTPConfig.imageBaseURL + posterPath),
+           let data = try? Data(contentsOf: posterURL)
+        {
+            self.posterData = data
         } else {
-            self.posterURL = nil
+            self.posterData = nil
         }
-        if let backdropPath = dto.backdropPath {
-            self.backdropURL = HTTPConfig.imageBaseURL + backdropPath
+        if let backdropPath = dto.backdropPath,
+           let backdropURL = URL(string: HTTPConfig.imageBaseURL + backdropPath),
+           let data = try? Data(contentsOf: backdropURL)
+        {
+            self.backdropData = data
         } else {
-            self.backdropURL = nil
+            self.backdropData = nil
         }
         self.noOfVotes = dto.noOfVotes
         self.averageVote = dto.averageVote
