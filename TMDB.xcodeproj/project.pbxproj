@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D3B187A72AA6376300A56765 /* SpinnerCompatible.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B187A62AA6376300A56765 /* SpinnerCompatible.swift */; };
 		D3D79A882A9DEA1500E5FD89 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D79A872A9DEA1500E5FD89 /* AppDelegate.swift */; };
 		D3D79A8A2A9DEA1500E5FD89 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D79A892A9DEA1500E5FD89 /* SceneDelegate.swift */; };
 		D3D79A922A9DEA1500E5FD89 /* TMDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D3D79A902A9DEA1500E5FD89 /* TMDB.xcdatamodeld */; };
@@ -83,6 +84,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D3B187A62AA6376300A56765 /* SpinnerCompatible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerCompatible.swift; sourceTree = "<group>"; };
 		D3D79A842A9DEA1500E5FD89 /* TMDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TMDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3D79A872A9DEA1500E5FD89 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3D79A892A9DEA1500E5FD89 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -170,6 +172,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D3B187A52AA6374600A56765 /* Spinner */ = {
+			isa = PBXGroup;
+			children = (
+				D3B187A62AA6376300A56765 /* SpinnerCompatible.swift */,
+			);
+			name = Spinner;
+			sourceTree = "<group>";
+		};
 		D3D79A7B2A9DEA1500E5FD89 = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +263,7 @@
 		D3D79ABE2A9DEE5800E5FD89 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				D3B187A52AA6374600A56765 /* Spinner */,
 				D3D79ADF2A9E082F00E5FD89 /* Extensions */,
 			);
 			path = Helpers;
@@ -659,6 +670,7 @@
 				D3D79AF72AA09A4900E5FD89 /* MovieCastMember.swift in Sources */,
 				D3D79B312AA1EB5000E5FD89 /* MoviesListViewModel.swift in Sources */,
 				D3D79A882A9DEA1500E5FD89 /* AppDelegate.swift in Sources */,
+				D3B187A72AA6376300A56765 /* SpinnerCompatible.swift in Sources */,
 				D3D79B2A2AA0FEB100E5FD89 /* CategoryTableViewCell.swift in Sources */,
 				D3D79B042AA0AB1E00E5FD89 /* MovieDetailsService.swift in Sources */,
 				D3D79ACE2A9DFF8300E5FD89 /* HTTPConfig.swift in Sources */,

@@ -55,6 +55,16 @@ class MoviesListViewController: UIViewController {
         self.setupViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.view.showSpinner()
+        self.viewModel.fetchMovies() { [weak self] in
+            self?.collectionView.reloadData()
+            self?.view.hideSpinner()
+        }
+    }
+    
 }
 
 // MARK: - UI Setup
@@ -79,8 +89,8 @@ private extension MoviesListViewController {
     func setupViews() {
         self.collectionView = .init(frame: self.view.frame, collectionViewLayout: UICollectionViewFlowLayout())
         
-        self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        self.collectionView.delegate = self
         
         self.collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: Constants.cellId)
     }

@@ -40,8 +40,8 @@ class MoviesListViewModel: ObservableObject {
         self.service = service
         self.router = router
         
-        self.fetchMovies()
-        self.search()
+//        self.fetchMovies()
+//        self.search()
     }
     
 }
@@ -50,47 +50,54 @@ class MoviesListViewModel: ObservableObject {
 
 extension MoviesListViewModel: MoviesListViewModelInputProtocol {
     
-    func fetchMovies() {
+    func fetchMovies(completionHandler: (() -> Void)? = nil) {
         switch category {
         case .popular:
             self.storeMovies(
-                self.service.getPopular(self.currentPage)
+                self.service.getPopular(self.currentPage),
+                completionHandler: completionHandler
             )
             
         case .nowPlaying:
             self.storeMovies(
-                self.service.getNowPlaying(self.currentPage)
+                self.service.getNowPlaying(self.currentPage),
+                completionHandler: completionHandler
             )
             
         case .upcoming:
             self.storeMovies(
-                self.service.getUpcoming(self.currentPage)
+                self.service.getUpcoming(self.currentPage),
+                completionHandler: completionHandler
             )
             
         case .topRated:
             self.storeMovies(
-                self.service.getTopRated(self.currentPage)
+                self.service.getTopRated(self.currentPage),
+                completionHandler: completionHandler
             )
         }
     }
     
-    func search() {
+    func search(completionHandler: (() -> Void)?) {
         self.storeMovies(
             self.service.search(
                 self.searchKeyword,
                 page: self.currentPage
-            )
+            ),
+            completionHandler: completionHandler
         )
     }
     
-    func storeMovies(_ publisher: MoviesPublisher<MoviesDTO>) {
+    func storeMovies(
+        _ publisher: MoviesPublisher<MoviesDTO>, completionHandler: (() -> Void)?) {
         publisher
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
             switch completion {
             case .finished: ()
             case .failure(let error):
                 self?.errorMessage = error.localizedDescription
-                print(error.localizedDescription)
+                print(error)
             }
         } receiveValue: { [weak self] result in
             if self?.currentPage == 1 {
@@ -99,7 +106,10 @@ extension MoviesListViewModel: MoviesListViewModelInputProtocol {
             let moviesForCurrentPage = result.movies.map { Movie(dto: $0) }
             self?.movies.append(contentsOf: moviesForCurrentPage)
             self?.noOfPages = result.noOfPages
+            
+            completionHandler?()
         }
+        
         .store(in: &cancellables)
     }
     
