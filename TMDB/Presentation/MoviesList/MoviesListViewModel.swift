@@ -20,14 +20,8 @@ class MoviesListViewModel: ObservableObject {
     @Published var errorMessage: String? = nil
     @Published var searchKeyword: String = ""
     
-    var currentPage = 1 {
-        didSet {
-            guard self.currentPage <= self.noOfPages else { return }
-            self.fetchMovies()
-        }
-    }
+    var currentPage = 0
     var noOfPages = 1
-    var cancellables: Set<AnyCancellable> = []
     
     // MARK: - Initializers
     
@@ -38,10 +32,7 @@ class MoviesListViewModel: ObservableObject {
     ) {
         self.category = category
         self.service = service
-        self.router = router
-        
-//        self.fetchMovies()
-//        self.search()
+        self.router = router        
     }
     
 }
@@ -50,67 +41,53 @@ class MoviesListViewModel: ObservableObject {
 
 extension MoviesListViewModel: MoviesListViewModelInputProtocol {
     
-    func fetchMovies(completionHandler: (() -> Void)? = nil) {
+    func fetchMovies(completion: (() -> Void)? = nil) {
+        self.currentPage += 1
         switch category {
         case .popular:
-            self.storeMovies(
-                self.service.getPopular(self.currentPage),
-                completionHandler: completionHandler
-            )
+            self.service.getPopular(self.currentPage) { [weak self] result in
+                self?.mapResult(result)
+                completion?()
+            }
             
         case .nowPlaying:
-            self.storeMovies(
-                self.service.getNowPlaying(self.currentPage),
-                completionHandler: completionHandler
-            )
+            self.service.getNowPlaying(self.currentPage) { [weak self] result in
+                self?.mapResult(result)
+                completion?()
+            }
             
         case .upcoming:
-            self.storeMovies(
-                self.service.getUpcoming(self.currentPage),
-                completionHandler: completionHandler
-            )
+            self.service.getUpcoming(self.currentPage) { [weak self] result in
+                self?.mapResult(result)
+                completion?()
+            }
             
         case .topRated:
-            self.storeMovies(
-                self.service.getTopRated(self.currentPage),
-                completionHandler: completionHandler
-            )
+            self.service.getTopRated(self.currentPage) { [weak self] result in
+                self?.mapResult(result)
+                completion?()
+            }
         }
     }
     
-    func search(completionHandler: (() -> Void)?) {
-        self.storeMovies(
-            self.service.search(
-                self.searchKeyword,
-                page: self.currentPage
-            ),
-            completionHandler: completionHandler
-        )
+    func search(completion: (() -> Void)?) {
+        self.service.search(self.searchKeyword, page: self.currentPage) { [weak self] result in
+            self?.mapResult(result)
+            completion?()
+        }
     }
     
-    func storeMovies(
-        _ publisher: MoviesPublisher<MoviesDTO>, completionHandler: (() -> Void)?) {
-        publisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] completion in
-            switch completion {
-            case .finished: ()
-            case .failure(let error):
-                self?.errorMessage = error.localizedDescription
-                print(error)
+    func mapResult(_ result: Result<Movies, Error>) {
+        switch result {
+        case .success(let movies):
+            self.noOfPages = movies.noOfPages
+            if self.currentPage == 1 {
+                self.movies.removeAll()
             }
-        } receiveValue: { [weak self] result in
-            if self?.currentPage == 1 {
-                self?.movies.removeAll()
-            }
-            let moviesForCurrentPage = result.movies.map { Movie(dto: $0) }
-            self?.movies.append(contentsOf: moviesForCurrentPage)
-            self?.noOfPages = result.noOfPages
-            
-            completionHandler?()
+            self.movies.append(contentsOf: movies.movies)
+        case .failure(let error):
+            self.errorMessage = error.localizedDescription
         }
-        
-        .store(in: &cancellables)
     }
     
     func didTapOnMovie(_ id: Int) {

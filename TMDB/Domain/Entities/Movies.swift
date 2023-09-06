@@ -1,5 +1,5 @@
 //
-//  Movie.swift
+//  Movies.swift
 //  TMDB
 //
 //  Created by Radwa Ahmed on 29/08/2023.
@@ -7,7 +7,22 @@
 
 import Foundation
 
-struct Movie {
+struct Movies: Decodable {
+    let noOfPages: Int
+    let movies: [Movie]
+    
+    init() {
+        self.noOfPages = 0
+        self.movies = []
+    }
+    
+    init(dto: MoviesDTO) {
+        self.noOfPages = dto.noOfPages
+        self.movies = dto.movies.map { Movie(dto: $0) }
+    }
+}
+
+struct Movie: Decodable {
     let id: Int
     let title: String
     let releaseDate: String

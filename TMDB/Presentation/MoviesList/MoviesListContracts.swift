@@ -8,8 +8,8 @@
 import Foundation
 
 protocol MoviesListViewModelInputProtocol: AnyObject {
-    func fetchMovies(completionHandler: (() -> Void)?)
-    func search(completionHandler: (() -> Void)?)
+    func fetchMovies(completion: (() -> Void)?)
+    func search(completion: (() -> Void)?)
     
     func didTapOnMovie(_ id: Int)
 }

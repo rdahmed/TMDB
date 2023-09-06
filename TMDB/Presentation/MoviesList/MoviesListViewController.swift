@@ -60,8 +60,10 @@ class MoviesListViewController: UIViewController {
         
         self.view.showSpinner()
         self.viewModel.fetchMovies() { [weak self] in
-            self?.collectionView.reloadData()
-            self?.view.hideSpinner()
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+                self?.view.hideSpinner()
+            }
         }
     }
     
@@ -72,6 +74,7 @@ class MoviesListViewController: UIViewController {
 private extension MoviesListViewController {
     
     func setupLayout() {
+        self.collectionView = .init(frame: self.view.frame, collectionViewLayout: UICollectionViewFlowLayout())
         self.view.addSubview(self.collectionView)
     }
     
@@ -87,12 +90,10 @@ private extension MoviesListViewController {
     }
     
     func setupViews() {
-        self.collectionView = .init(frame: self.view.frame, collectionViewLayout: UICollectionViewFlowLayout())
+        self.collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: Constants.cellId)
         
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-        
-        self.collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: Constants.cellId)
     }
     
 }
