@@ -7,14 +7,9 @@
 
 import Foundation
 
-struct Movies: Decodable {
+struct Movies {
     let noOfPages: Int
     let movies: [Movie]
-    
-    init() {
-        self.noOfPages = 0
-        self.movies = []
-    }
     
     init(dto: MoviesDTO) {
         self.noOfPages = dto.noOfPages

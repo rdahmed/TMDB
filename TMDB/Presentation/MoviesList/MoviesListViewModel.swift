@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Combine
 
 class MoviesListViewModel: ObservableObject {
     
@@ -16,12 +15,12 @@ class MoviesListViewModel: ObservableObject {
     private let service: MoviesServiceProtocol
     private let router: MoviesListRouter
     
+    @Published var errorMessage: String?
     @Published var movies: [Movie] = []
-    @Published var errorMessage: String? = nil
     @Published var searchKeyword: String = ""
     
-    var currentPage = 0
-    var noOfPages = 1
+    private var currentPage = 0
+    private var noOfPages = 1
     
     // MARK: - Initializers
     
@@ -35,6 +34,10 @@ class MoviesListViewModel: ObservableObject {
         self.router = router        
     }
     
+    deinit {
+        print(#function, #file)
+    }
+    
 }
 
 // MARK: - ViewModelInput
@@ -42,7 +45,6 @@ class MoviesListViewModel: ObservableObject {
 extension MoviesListViewModel: MoviesListViewModelInputProtocol {
     
     func fetchMovies(completion: (() -> Void)? = nil) {
-        self.currentPage += 1
         switch category {
         case .popular:
             self.service.getPopular(self.currentPage) { [weak self] result in
@@ -77,14 +79,22 @@ extension MoviesListViewModel: MoviesListViewModelInputProtocol {
         }
     }
     
-    func mapResult(_ result: Result<Movies, Error>) {
+    private func mapResult(_ result: Result<Movies?, Error>) {
+        guard self.currentPage < self.noOfPages else { return }
+        
+        self.currentPage += 1
         switch result {
         case .success(let movies):
-            self.noOfPages = movies.noOfPages
-            if self.currentPage == 1 {
-                self.movies.removeAll()
+            if let movies {
+                self.noOfPages = movies.noOfPages
+                if self.currentPage == 1 {
+                    self.movies.removeAll()
+                }
+                self.movies.append(contentsOf: movies.movies)
+            } else {
+                self.errorMessage = NetworkServiceError.emptyResponse.errorDescription
             }
-            self.movies.append(contentsOf: movies.movies)
+            
         case .failure(let error):
             self.errorMessage = error.localizedDescription
         }

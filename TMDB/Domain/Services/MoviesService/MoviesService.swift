@@ -19,9 +19,9 @@ class MoviesService: MoviesServiceProtocol {
 extension MoviesService {
     func getNowPlaying(
         _ page: Int,
-        completionHandler: @escaping ((Result<Movies, Error>) -> Void)
+        completionHandler: @escaping ((Result<Movies?, Error>) -> Void)
     ) {
-        let publisher: MoviesPublisher<MoviesDTO>  = self.jsonTranspost.get(
+        let publisher: MoviesPublisher<MoviesDTO> = self.jsonTranspost.get(
             route: .getNowPlaying,
             queryItems: ["page" : "\(page)"]
         )
@@ -32,9 +32,9 @@ extension MoviesService {
     
     func getPopular(
         _ page: Int,
-        completionHandler: @escaping ((Result<Movies, Error>) -> Void)
+        completionHandler: @escaping ((Result<Movies?, Error>) -> Void)
     ) {
-        let publisher: MoviesPublisher<MoviesDTO>  = self.jsonTranspost.get(
+        let publisher: MoviesPublisher<MoviesDTO> = self.jsonTranspost.get(
             route: .getPopular,
             queryItems: ["page" : "\(page)"]
         )
@@ -45,9 +45,9 @@ extension MoviesService {
     
     func getTopRated(
         _ page: Int,
-        completionHandler: @escaping ((Result<Movies, Error>) -> Void)
+        completionHandler: @escaping ((Result<Movies?, Error>) -> Void)
     ) {
-        let publisher: MoviesPublisher<MoviesDTO>  = self.jsonTranspost.get(
+        let publisher: MoviesPublisher<MoviesDTO> = self.jsonTranspost.get(
             route: .getTopRated,
             queryItems: ["page" : "\(page)"]
         )
@@ -58,9 +58,9 @@ extension MoviesService {
     
     func getUpcoming(
         _ page: Int,
-        completionHandler: @escaping ((Result<Movies, Error>) -> Void)
+        completionHandler: @escaping ((Result<Movies?, Error>) -> Void)
     ) {
-        let publisher: MoviesPublisher<MoviesDTO>  = self.jsonTranspost.get(
+        let publisher: MoviesPublisher<MoviesDTO> = self.jsonTranspost.get(
             route: .getUpcoming,
             queryItems: ["page" : "\(page)"]
         )
@@ -72,9 +72,9 @@ extension MoviesService {
     func search(
         _ keyword: String,
         page: Int,
-        completionHandler: @escaping ((Result<Movies, Error>) -> Void)
+        completionHandler: @escaping ((Result<Movies?, Error>) -> Void)
     ) {
-        let publisher: MoviesPublisher<MoviesDTO>  = self.jsonTranspost.get(
+        let publisher: MoviesPublisher<MoviesDTO> = self.jsonTranspost.get(
             route: .search,
             queryItems: ["query": keyword, "page" : "\(page)"]
         )
@@ -87,9 +87,9 @@ extension MoviesService {
 extension MoviesService {
     func storedMovies(
     _ publisher: MoviesPublisher<MoviesDTO>,
-    completionHandler: @escaping ((Result<Movies, Error>) -> Void)
+    completionHandler: @escaping ((Result<Movies?, Error>) -> Void)
     ) {
-        var movies = Movies()
+        var movies: Movies?
         publisher
             .sink { completion in
             switch completion {

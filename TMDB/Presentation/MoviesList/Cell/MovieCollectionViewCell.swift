@@ -108,8 +108,8 @@ private extension MovieCollectionViewCell {
     }
     
     func setupContentView() {
-        self.contentView.layer.cornerRadius = 8
         self.contentView.backgroundColor = .clear
+        self.contentView.rounded()
         self.contentView.shadowed()
     }
     

@@ -1,11 +1,13 @@
 //
-//  MovieCastMember.swift
+//  MovieCast.swift
 //  TMDB
 //
 //  Created by Radwa Ahmed on 31/08/2023.
 //
 
 import Foundation
+
+typealias MovieCast = [MovieCastMember]
 
 struct MovieCastMember {
     let name: String
