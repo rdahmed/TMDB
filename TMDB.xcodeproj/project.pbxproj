@@ -456,11 +456,11 @@
 		D3D79B2B2AA1EAF500E5FD89 /* MoviesList */ = {
 			isa = PBXGroup;
 			children = (
-				D3D79B342AA21BBC00E5FD89 /* Cell */,
 				D3D79B2C2AA1EB1900E5FD89 /* MoviesListContracts.swift */,
 				D3D79B2E2AA1EB3400E5FD89 /* MoviesListRouter.swift */,
 				D3D79B302AA1EB5000E5FD89 /* MoviesListViewModel.swift */,
 				D3D79B322AA1EB7D00E5FD89 /* MoviesListViewController.swift */,
+				D3D79B342AA21BBC00E5FD89 /* Cell */,
 			);
 			path = MoviesList;
 			sourceTree = "<group>";
@@ -826,6 +826,7 @@
 				INFOPLIST_FILE = TMDB/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -853,6 +854,7 @@
 				INFOPLIST_FILE = TMDB/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -47,10 +47,6 @@ class MovieCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        print(#function, #file)
-    }
-    
 }
 
 // MARK: - UI Setup
@@ -80,7 +76,7 @@ private extension MovieCollectionViewCell {
             self.posterImageView.heightAnchor.constraint(equalToConstant: Constants.posterImageHeight),
             
             self.userScoreView.centerYAnchor.constraint(equalTo: self.posterImageView.bottomAnchor),
-            self.userScoreView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),
+            self.userScoreView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
             self.userScoreView.heightAnchor.constraint(equalToConstant: Constants.userScoreViewHeight),
             self.userScoreView.widthAnchor.constraint(equalToConstant: Constants.userScoreViewHeight),
             self.userScoreLabel.centerXAnchor.constraint(equalTo: self.userScoreView.centerXAnchor),
@@ -90,7 +86,7 @@ private extension MovieCollectionViewCell {
             self.nameLabel.leadingAnchor.constraint(equalTo: self.userScoreView.leadingAnchor),
             self.nameLabel.trailingAnchor.constraint(lessThanOrEqualTo: self.contentView.trailingAnchor, constant: -12),
             
-            self.dateLabel.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: 0),
+            self.dateLabel.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor, constant: 2),
             self.dateLabel.leadingAnchor.constraint(equalTo: self.nameLabel.leadingAnchor),
             self.dateLabel.trailingAnchor.constraint(equalTo: self.nameLabel.trailingAnchor),
             self.dateLabel.bottomAnchor.constraint(lessThanOrEqualTo: self.contentView.bottomAnchor, constant: -8)
@@ -100,6 +96,7 @@ private extension MovieCollectionViewCell {
     }
     
     func setupViews() {
+        self.shadowed()
         self.setupContentView()
         self.setupPosterImageView()
         self.setupNameLabel()
@@ -108,25 +105,26 @@ private extension MovieCollectionViewCell {
     }
     
     func setupContentView() {
-        self.contentView.backgroundColor = .clear
+        self.contentView.backgroundColor = .white
         self.contentView.rounded()
-        self.contentView.shadowed()
     }
     
     func setupPosterImageView() {
-        self.posterImageView.contentMode = .scaleAspectFit
+        self.posterImageView.contentMode = .scaleAspectFill
+        self.posterImageView.clipsToBounds = true
     }
     
     func setupNameLabel() {
+        self.nameLabel.numberOfLines = 2
         self.nameLabel.textAlignment = .left
         self.nameLabel.textColor = .primaryTextColor
-        self.nameLabel.font = .systemFont(ofSize: 16, weight: .semibold)
+        self.nameLabel.font = .systemFont(ofSize: 14, weight: .semibold)
     }
     
     func setupDateLabel() {
         self.dateLabel.textAlignment = .left
         self.dateLabel.textColor = .secondaryTextColor
-        self.dateLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        self.dateLabel.font = .systemFont(ofSize: 12, weight: .regular)
     }
     
     func setupUserScoreView() {
@@ -135,7 +133,7 @@ private extension MovieCollectionViewCell {
 
         self.userScoreLabel.textAlignment = .center
         self.userScoreLabel.textColor = .primaryTintColor
-        self.userScoreLabel.font = .systemFont(ofSize: 12, weight: .semibold)
+        self.userScoreLabel.font = .systemFont(ofSize: 10, weight: .semibold)
     }
     
     func updateUI(_ movie: Movie) {
@@ -149,7 +147,7 @@ private extension MovieCollectionViewCell {
         }
         
         if let vote = movie.averageVote, vote >= 1 {
-            let percentageFont: UIFont = .systemFont(ofSize: 8, weight: .semibold)
+            let percentageFont: UIFont = .systemFont(ofSize: 6, weight: .semibold)
             let userScoreAttStr = NSMutableAttributedString(string: "\(Int(vote * 10))%")
             userScoreAttStr.setAttributes(
                 [.font: percentageFont, .baselineOffset: 4],

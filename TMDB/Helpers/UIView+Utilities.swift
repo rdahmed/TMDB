@@ -15,11 +15,11 @@ extension UIView {
     }
     
     func circular() {
-        self.layer.cornerRadius = frame.height / 2
+        self.layer.cornerRadius = self.frame.height / 2
         self.layer.masksToBounds = true
     }
     
-    func shadowed(opacity: Float = 0.08, offset: CGSize = .init(width: 2, height: 2)) {
+    func shadowed(opacity: Float = 0.5, offset: CGSize = .init(width: 2, height: 2)) {
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOffset = offset
         self.layer.shadowRadius = 5

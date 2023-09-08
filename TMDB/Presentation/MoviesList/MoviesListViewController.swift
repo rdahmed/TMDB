@@ -83,13 +83,17 @@ private extension MoviesListViewController {
         
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            self.collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8),
-            self.collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -8),
+            self.collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
     }
     
     func setupViews() {
+        self.navigationItem.title = "\(self.viewModel.category.title) Movies"
+        
+        self.collectionView.backgroundColor = .clear
+        self.collectionView.contentInset = .init(top: 8, left: 8, bottom: 8, right: 8)
         self.collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: Constants.cellId)
         
         self.collectionView.dataSource = self

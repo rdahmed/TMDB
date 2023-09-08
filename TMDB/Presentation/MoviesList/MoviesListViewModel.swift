@@ -11,7 +11,7 @@ class MoviesListViewModel: ObservableObject {
     
     // MARK: - Dependencies
     
-    private let category: MovieCategory
+    let category: MovieCategory
     private let service: MoviesServiceProtocol
     private let router: MoviesListRouter
     
@@ -45,6 +45,9 @@ class MoviesListViewModel: ObservableObject {
 extension MoviesListViewModel: MoviesListViewModelInputProtocol {
     
     func fetchMovies(completion: (() -> Void)? = nil) {
+        guard self.currentPage < self.noOfPages else { return }
+        self.currentPage += 1
+        
         switch category {
         case .popular:
             self.service.getPopular(self.currentPage) { [weak self] result in
@@ -80,9 +83,6 @@ extension MoviesListViewModel: MoviesListViewModelInputProtocol {
     }
     
     private func mapResult(_ result: Result<Movies?, Error>) {
-        guard self.currentPage < self.noOfPages else { return }
-        
-        self.currentPage += 1
         switch result {
         case .success(let movies):
             if let movies {
