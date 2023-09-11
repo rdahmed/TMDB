@@ -23,7 +23,7 @@ struct MovieReview {
     let content: String
     let creatingDate: String
     let updatingDate: String?
-    let url: String?
+    let rating: Int?
     
     init(dto: MovieReviewDTO) {
         self.id = dto.id
@@ -31,6 +31,6 @@ struct MovieReview {
         self.content = dto.content
         self.creatingDate = dto.creatingDate.formatted("YYYY-MM-dd'T'hh:mm:ss.SSS'Z'")
         self.updatingDate = dto.updatingDate?.formatted("YYYY-MM-dd'T'hh:mm:ss.SSS'Z'")
-        self.url = dto.url
+        self.rating = dto.rating
     }
 }

@@ -12,15 +12,18 @@ typealias MovieCast = [MovieCastMember]
 struct MovieCastMember {
     let name: String
     let character: String
-    let profileURL: String?
+    let profileData: Data?
     
     init(dto: MovieCastMemberDTO) {
         self.name = dto.name
         self.character = dto.character
-        if let profilePath = dto.profilePath {
-            self.profileURL = HTTPConfig.imageBaseURL + profilePath
+        if let profilePath = dto.profilePath,
+           let profileURL = URL(string: HTTPConfig.imageBaseURL + profilePath),
+           let data = try? Data(contentsOf: profileURL)
+        {
+            self.profileData = data
         } else {
-            self.profileURL = nil
+            self.profileData = nil
         }
     }
 }

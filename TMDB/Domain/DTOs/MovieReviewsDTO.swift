@@ -36,7 +36,11 @@ struct MovieReviewDTO: Decodable {
     let content: String
     let creatingDate: String
     let updatingDate: String?
-    let url: String?
+    let rating: Int?
+    
+    enum AutherKey: String, CodingKey {
+        case author = "author_details"
+    }
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -44,17 +48,18 @@ struct MovieReviewDTO: Decodable {
         case content
         case creatingDate = "created_at"
         case updatingDate = "updated_at"
-        case url
+        case rating
     }
     
     init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let author = try decoder.container(keyedBy: AutherKey.self)
+        let container = try author.nestedContainer(keyedBy: CodingKeys.self, forKey: .author)
         
         self.id = try container.decode(String.self, forKey: .id)
         self.authorName = try container.decode(String.self, forKey: .authorName)
         self.content = try container.decode(String.self, forKey: .content)
         self.creatingDate = try container.decode(String.self, forKey: .creatingDate)
         self.updatingDate = try container.decodeIfPresent(String.self, forKey: .updatingDate)
-        self.url = try container.decodeIfPresent(String.self, forKey: .url)
+        self.rating = try container.decodeIfPresent(Int.self, forKey: .rating)
     }
 }

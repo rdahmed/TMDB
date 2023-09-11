@@ -76,11 +76,10 @@ private extension MoviesListViewController {
     func setupLayout() {
         self.collectionView = .init(frame: self.view.frame, collectionViewLayout: UICollectionViewFlowLayout())
         self.view.addSubview(self.collectionView)
+        self.collectionView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func setupConstraints() {
-        self.collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             self.collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
@@ -122,7 +121,7 @@ extension MoviesListViewController: UICollectionViewDataSource {
             for: indexPath) as? MovieCollectionViewCell
         else { return .init() }
         
-        cell.movie = self.viewModel.movies[indexPath.row]
+        cell.movie = self.viewModel.movies[indexPath.item]
         
         return cell
     }

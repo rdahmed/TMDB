@@ -11,8 +11,8 @@ struct MovieDetails {
     let id: Int
     let title: String
     let releaseDate: String
-    let genres: [Genre]?
-    let duration: Int
+    let genres: [String]?
+    let duration: String
     let overview: String
     let ratingAsAdults: Bool
     let posterData: Data?
@@ -27,8 +27,8 @@ struct MovieDetails {
         self.id = dto.id
         self.title = dto.title
         self.releaseDate = dto.releaseDate.formatted("YYYY-MM-dd")
-        self.genres = dto.genres
-        self.duration = dto.duration
+        self.genres = dto.genres?.map(\.name)
+        self.duration = "\(Int(dto.duration / 60))h \(dto.duration % 60)m"
         self.overview = dto.overview
         self.ratingAsAdults = dto.ratingAsAdults
         if let posterPath = dto.posterPath,
