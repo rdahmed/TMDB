@@ -96,13 +96,13 @@ private extension CastMemberCollectionViewCell {
         self.memberNameLabel.numberOfLines = 2
         self.memberNameLabel.textAlignment = .left
         self.memberNameLabel.textColor = .primaryTextColor
-        self.memberNameLabel.font = .systemFont(ofSize: 14, weight: .semibold)
+        self.memberNameLabel.font = .systemFont(ofSize: 12, weight: .semibold)
     }
     
     func setupCharacterNameLabel() {
         self.characterNameLabel.textAlignment = .left
         self.characterNameLabel.textColor = .secondaryTextColor
-        self.characterNameLabel.font = .systemFont(ofSize: 12, weight: .regular)
+        self.characterNameLabel.font = .systemFont(ofSize: 10, weight: .regular)
     }
     
     func updateUI(_ castMember: MovieCastMember) {
@@ -114,6 +114,8 @@ private extension CastMemberCollectionViewCell {
             self.memberImageView.image = UIImage(systemName: "person.fill")
             self.memberImageView.tintColor = .lightGray
         }
+        self.memberNameLabel.text = castMember.name
+        self.characterNameLabel.text = castMember.character
     }
     
 }

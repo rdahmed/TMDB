@@ -35,22 +35,22 @@ extension SpinnerCompatible where Self: UIView {
             spinner.style = .large
         }
         spinner.hidesWhenStopped = true
-        layout(spinner, in: self)
+        self.layout(spinner, in: self)
         return spinner
     }
     
     // Default implementation
     func showSpinner(color: UIColor = UIColor.accentColor, dims: Bool = false, blocks: Bool = false) {
-        spinner.backgroundColor = dims ? UIColor.black.withAlphaComponent(0.15) : .clear
-        spinner.isUserInteractionEnabled = blocks
-        spinner.color = color
-        spinner.startAnimating()
+        self.spinner.backgroundColor = dims ? UIColor.black.withAlphaComponent(0.15) : .clear
+        self.spinner.isUserInteractionEnabled = blocks
+        self.spinner.color = color
+        self.spinner.startAnimating()
     }
     
     // Default implementation
     func hideSpinner() {
-        isUserInteractionEnabled = true
-        spinner.stopAnimating()
+        self.isUserInteractionEnabled = true
+        self.spinner.stopAnimating()
     }
     
     // MARK: Helper

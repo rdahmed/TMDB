@@ -42,24 +42,29 @@ struct MovieReviewDTO: Decodable {
         case author = "author_details"
     }
     
+    enum RatingKey: String, CodingKey {
+        case rating
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case authorName = "author"
         case content
         case creatingDate = "created_at"
         case updatingDate = "updated_at"
-        case rating
     }
     
     init(from decoder: Decoder) throws {
-        let author = try decoder.container(keyedBy: AutherKey.self)
-        let container = try author.nestedContainer(keyedBy: CodingKeys.self, forKey: .author)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.id = try container.decode(String.self, forKey: .id)
         self.authorName = try container.decode(String.self, forKey: .authorName)
         self.content = try container.decode(String.self, forKey: .content)
         self.creatingDate = try container.decode(String.self, forKey: .creatingDate)
         self.updatingDate = try container.decodeIfPresent(String.self, forKey: .updatingDate)
-        self.rating = try container.decodeIfPresent(Int.self, forKey: .rating)
+        
+        let authorContainer = try decoder.container(keyedBy: AutherKey.self)
+        let ratingContainer = try authorContainer.nestedContainer(keyedBy: RatingKey.self, forKey: .author)
+        self.rating = try ratingContainer.decodeIfPresent(Int.self, forKey: .rating)
     }
 }

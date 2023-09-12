@@ -11,7 +11,21 @@ class ReviewTableViewCell: UITableViewCell {
     
     // MARK: - Dependencies
     
-    var review: MovieReview?
+    var review: MovieReview? {
+        didSet {
+            guard let review else { return }
+            self.updateUI(review)
+        }
+    }
+    
+    var randomColor: UIColor {
+        return UIColor(
+            red: (.random(in: 5...250) / 255),
+            green: (.random(in: 5...250) / 255),
+            blue: (.random(in: 5...250) / 255),
+            alpha: 1
+        )
+    }
     
     // MARK: - Properties
     
@@ -76,11 +90,17 @@ private extension ReviewTableViewCell {
     }
     
     func setupConstraints() {
+        let contentLabelBottomConstraint = self.reviewContentLabel.bottomAnchor.constraint(
+            equalTo: self.contentView.bottomAnchor,
+            constant: -8
+        )
+        contentLabelBottomConstraint.priority = .defaultHigh
+        
         NSLayoutConstraint.activate([
             self.reviewerImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8),
             self.reviewerImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 8),
-            self.reviewerImageView.heightAnchor.constraint(equalToConstant: 50),
-            self.reviewerImageView.widthAnchor.constraint(equalToConstant: 50),
+            self.reviewerImageView.heightAnchor.constraint(equalToConstant: 40),
+            self.reviewerImageView.widthAnchor.constraint(equalToConstant: 40),
             
             self.reviewerFirstLabel.centerYAnchor.constraint(equalTo: self.reviewerImageView.centerYAnchor),
             self.reviewerFirstLabel.centerXAnchor.constraint(equalTo: self.reviewerImageView.centerXAnchor),
@@ -89,23 +109,26 @@ private extension ReviewTableViewCell {
             self.reviewerNameLabel.leadingAnchor.constraint(equalTo: self.reviewerImageView.trailingAnchor, constant: 8),
             self.reviewerNameLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
             
+            self.ratingView.heightAnchor.constraint(equalToConstant: 20),
             self.ratingView.topAnchor.constraint(equalTo: self.reviewerNameLabel.bottomAnchor, constant: 2),
             self.ratingView.leadingAnchor.constraint(equalTo: self.reviewerNameLabel.leadingAnchor),
-            self.ratingView.heightAnchor.constraint(equalToConstant: 20),
             
-            self.starImageView.topAnchor.constraint(equalTo: self.ratingView.topAnchor, constant: 2),
-            self.starImageView.leadingAnchor.constraint(equalTo: self.ratingView.leadingAnchor, constant: 2),
-            self.starImageView.bottomAnchor.constraint(equalTo: self.ratingView.bottomAnchor, constant: -2),
-            self.starImageView.bottomAnchor.constraint(equalTo: self.ratingView.bottomAnchor, constant: -2),
+            self.starImageView.heightAnchor.constraint(equalToConstant: 10),
+            self.starImageView.widthAnchor.constraint(equalToConstant: 10),
+            self.starImageView.centerYAnchor.constraint(equalTo: self.ratingView.centerYAnchor),
+            self.starImageView.leadingAnchor.constraint(equalTo: self.ratingView.leadingAnchor, constant: 8),
             
             self.ratingLabel.centerYAnchor.constraint(equalTo: self.starImageView.centerYAnchor),
-            self.ratingLabel.trailingAnchor.constraint(equalTo: self.ratingView.trailingAnchor, constant: -2),
+            self.ratingLabel.leadingAnchor.constraint(equalTo: self.starImageView.trailingAnchor, constant: 4),
+            self.ratingLabel.trailingAnchor.constraint(equalTo: self.ratingView.trailingAnchor, constant: -8),
             
             self.reviewContentLabel.topAnchor.constraint(equalTo: self.reviewerImageView.bottomAnchor, constant: 10),
             self.reviewContentLabel.leadingAnchor.constraint(equalTo: self.reviewerImageView.leadingAnchor),
             self.reviewContentLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
-            self.reviewContentLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8)
+            contentLabelBottomConstraint
         ])
+        
+        self.contentView.layoutIfNeeded()
     }
     
     func setupViews() {
@@ -117,11 +140,11 @@ private extension ReviewTableViewCell {
     
     func setupReviewerImageView() {
         self.reviewerImageView.circular()
-        self.reviewerImageView.backgroundColor = .random
+        self.reviewerImageView.backgroundColor = self.randomColor
         
         self.reviewerFirstLabel.textAlignment = .center
         self.reviewerFirstLabel.textColor = .primaryTintColor
-        self.reviewerFirstLabel.font = .systemFont(ofSize: 16)
+        self.reviewerFirstLabel.font = .systemFont(ofSize: 20)
     }
     
     func setupReviewerNameLabel() {
@@ -137,15 +160,23 @@ private extension ReviewTableViewCell {
         self.starImageView.tintColor = .primaryTintColor
         
         self.ratingLabel.textAlignment = .center
-        self.reviewerFirstLabel.textColor = .primaryTintColor
-        self.reviewerFirstLabel.font = .systemFont(ofSize: 12, weight: .medium)
+        self.ratingLabel.textColor = .primaryTintColor
+        self.ratingLabel.font = .systemFont(ofSize: 12, weight: .medium)
     }
     
     func setupReviewContentLabel() {
         self.reviewContentLabel.numberOfLines = 0
         self.reviewContentLabel.textAlignment = .left
-        self.reviewerFirstLabel.textColor = .secondaryTextColor
-        self.reviewerFirstLabel.font = .systemFont(ofSize: 12)
+        self.reviewContentLabel.textColor = .secondaryTextColor
+        self.reviewContentLabel.font = .systemFont(ofSize: 14)
+    }
+    
+    func updateUI(_ review: MovieReview) {
+        let reviewerFirst = review.authorName.first ?? "?"
+        self.reviewerFirstLabel.text = "\(reviewerFirst)"
+        self.reviewerNameLabel.text = review.authorName
+        self.ratingLabel.text = "\((review.rating ?? 0) / 2).0"
+        self.reviewContentLabel.text = review.content
     }
     
 }

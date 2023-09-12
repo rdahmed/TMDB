@@ -65,7 +65,14 @@ extension MainCoordinator: CategoriesMenuRouter {
 extension MainCoordinator: MoviesListRouter {
     
     func showMovieDetails(_ id: Int) {
-        // TODO: Route to movie details
+        let viewModel = MovieDetailsViewModel(movieId: id, router: self)
+        let viewController = MovieDetailsViewController(viewModel: viewModel)
+        
+        self.navigationController.pushViewController(viewController, animated: true)
     }
     
 }
+
+// MARK: - MovieDetailsRouter
+
+extension MainCoordinator: MovieDetailsRouter {}

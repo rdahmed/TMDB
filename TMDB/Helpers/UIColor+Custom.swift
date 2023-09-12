@@ -8,12 +8,6 @@
 import UIKit
 
 extension UIColor {
-    static let random = UIColor(
-        red: (.random(in: 100...250) / 255),
-        green: (.random(in: 100...250) / 255),
-        blue: (.random(in: 100...250) / 255),
-        alpha: 1
-    )
     static let accentColor = UIColor(
         red: (3 / 255),
         green: (37 / 255),

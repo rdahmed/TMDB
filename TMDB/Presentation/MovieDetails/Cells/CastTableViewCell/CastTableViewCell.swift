@@ -12,7 +12,7 @@ class CastTableViewCell: UITableViewCell {
     private enum Constants {
         static let cellId: String = "castMemberCellId"
         static let itemHeight: CGFloat = 160
-        static let itemWidth: CGFloat = 64
+        static let itemWidth: CGFloat = 80
         static let lineSpacing: CGFloat = 8
         static let interitemSpacing: CGFloat = 8
     }
@@ -47,7 +47,9 @@ class CastTableViewCell: UITableViewCell {
 private extension CastTableViewCell {
     
     func setupLayout() {
-        self.collectionView = .init(frame: self.contentView.frame, collectionViewLayout: UICollectionViewFlowLayout())
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        self.collectionView = .init(frame: self.contentView.frame, collectionViewLayout: flowLayout)
         self.contentView.addSubview(self.collectionView)
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
     }

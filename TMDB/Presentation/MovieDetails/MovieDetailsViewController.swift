@@ -67,6 +67,28 @@ class MovieDetailsViewController: UIViewController {
         self.setupViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.viewModel.fetchDetails { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.reloadSections(IndexSet(arrayLiteral: 0, 1), with: .automatic)
+            }
+        }
+        
+        self.viewModel.fetchCredits { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.reloadSections(IndexSet(integer: 2), with: .automatic)
+            }
+        }
+        
+        self.viewModel.fetchReviews { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.reloadSections(IndexSet(integer: 3), with: .automatic)
+            }
+        }
+    }
+    
 }
 
 // MARK: - UI Setup
@@ -81,7 +103,7 @@ private extension MovieDetailsViewController {
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            self.tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 4),
+            self.tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
             self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
@@ -89,6 +111,8 @@ private extension MovieDetailsViewController {
     }
     
     func setupViews() {
+        self.view.backgroundColor = .white
+        
         self.tableView.backgroundColor = .clear
         self.tableView.separatorStyle = .none
         
@@ -97,6 +121,7 @@ private extension MovieDetailsViewController {
         }
         
         self.tableView.dataSource = self
+        self.tableView.delegate = self
     }
     
 }
@@ -125,7 +150,7 @@ extension MovieDetailsViewController: UITableViewDataSource {
     ) -> String? {
         DetailsSections.allCases[section].title
     }
-    
+        
     func tableView(
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
@@ -173,6 +198,25 @@ extension MovieDetailsViewController: UITableViewDataSource {
         }
         
         return cell ?? .init()
+    }
+    
+}
+
+// MARK: - UITableViewDelegate
+
+extension MovieDetailsViewController: UITableViewDelegate {
+    
+    func tableView(
+        _ tableView: UITableView,
+        heightForRowAt indexPath: IndexPath
+    ) -> CGFloat {
+        guard let section = DetailsSections(rawValue: indexPath.section) else { return .zero }
+        
+        switch section {
+        case .poster: return 200
+        case .cast: return 180
+        default: return UITableView.automaticDimension
+        }
     }
     
 }

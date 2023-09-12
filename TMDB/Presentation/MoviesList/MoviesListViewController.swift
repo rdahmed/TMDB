@@ -91,6 +91,8 @@ private extension MoviesListViewController {
     func setupViews() {
         self.navigationItem.title = "\(self.viewModel.category.title) Movies"
         
+        self.view.backgroundColor = .white
+        
         self.collectionView.backgroundColor = .clear
         self.collectionView.contentInset = .init(top: 8, left: 8, bottom: 8, right: 8)
         self.collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: Constants.cellId)

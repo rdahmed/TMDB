@@ -13,7 +13,14 @@ class UserScoreView: UIView {
     
     var vote: Double? {
         didSet {
-            self.updateUI(vote)
+            self.updateUI(self.vote)
+        }
+    }
+    
+    var font: UIFont = .systemFont(ofSize: 10, weight: .bold) {
+        didSet {
+            self.userScoreLabel.font = self.font
+            self.updateUI(self.vote)
         }
     }
     
@@ -64,10 +71,10 @@ private extension UserScoreView {
     
     func updateUI(_ vote: Double?) {
         if let vote, vote >= 1 {
-            let percentageFont: UIFont = .systemFont(ofSize: 6, weight: .semibold)
+            let percentageFont: UIFont = .systemFont(ofSize: self.font.pointSize / 2, weight: .semibold)
             let userScoreAttStr = NSMutableAttributedString(string: "\(Int(vote * 10))%")
             userScoreAttStr.setAttributes(
-                [.font: percentageFont, .baselineOffset: 4],
+                [.font: percentageFont, .baselineOffset: self.font.pointSize / 2],
                 range: .init(location: 2, length: 1)
             )
             self.userScoreLabel.attributedText = userScoreAttStr
