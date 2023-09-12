@@ -45,10 +45,6 @@ class MovieDetailsViewModel: ObservableObject {
 
 extension MovieDetailsViewModel: MovieDetailsViewModelInputProtocol {
     
-    func fetchData(completion: (() -> Void)?) {
-        
-    }
-    
     func fetchDetails(completion: (() -> Void)?) {
         self.service.getDetails(self.movieId) { result in
             switch result {
