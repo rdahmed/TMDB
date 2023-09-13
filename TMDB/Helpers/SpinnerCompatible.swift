@@ -31,7 +31,7 @@ extension SpinnerCompatible where Self: UIView {
         }
         
         let spinner = UIActivityIndicatorView(style: .medium)
-        if frame.width > 40 && frame.height > 40 {
+        if self.frame.width > 40 && self.frame.height > 40 {
             spinner.style = .large
         }
         spinner.hidesWhenStopped = true

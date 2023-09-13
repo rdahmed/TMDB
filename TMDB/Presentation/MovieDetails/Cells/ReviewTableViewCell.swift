@@ -123,8 +123,8 @@ private extension ReviewTableViewCell {
             self.ratingLabel.trailingAnchor.constraint(equalTo: self.ratingView.trailingAnchor, constant: -8),
             
             self.reviewContentLabel.topAnchor.constraint(equalTo: self.reviewerImageView.bottomAnchor, constant: 10),
-            self.reviewContentLabel.leadingAnchor.constraint(equalTo: self.reviewerImageView.leadingAnchor),
-            self.reviewContentLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
+            self.reviewContentLabel.leadingAnchor.constraint(equalTo: self.reviewerImageView.trailingAnchor),
+            self.reviewContentLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12),
             contentLabelBottomConstraint
         ])
         

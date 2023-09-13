@@ -58,7 +58,7 @@ private extension OverviewTableViewCell {
     func setupViews() {
         self.overviewLabel.numberOfLines = 0
         self.overviewLabel.textAlignment = .left
-        self.overviewLabel.textColor = .secondaryTextColor
+        self.overviewLabel.textColor = .primaryTextColor
         self.overviewLabel.font = .systemFont(ofSize: 16)
     }
     

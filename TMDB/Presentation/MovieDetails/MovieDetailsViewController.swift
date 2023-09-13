@@ -41,6 +41,10 @@ class MovieDetailsViewController: UIViewController {
     // MARK: - Properties
     
     private let tableView = UITableView(frame: .zero, style: .plain)
+    private let spinnerView = UIView()
+    private lazy var mainViewSubviews: [UIView] = {
+        return [self.tableView, self.spinnerView]
+    }()
     
     // MARK: - Initializers
     
@@ -70,9 +74,11 @@ class MovieDetailsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.showSpinner()
         self.viewModel.fetchDetails { [weak self] in
             DispatchQueue.main.async {
                 self?.tableView.reloadSections(IndexSet(arrayLiteral: 0, 1), with: .automatic)
+                self?.hideSpinner()
             }
         }
         
@@ -96,22 +102,31 @@ class MovieDetailsViewController: UIViewController {
 private extension MovieDetailsViewController {
     
     func setupLayout() {
-        self.view.addSubview(self.tableView)
+        self.mainViewSubviews.forEach {
+            self.view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setupConstraints() {
-        self.tableView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             self.tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+            self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            
+            self.spinnerView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.spinnerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.spinnerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.spinnerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
+        
+        self.view.layoutIfNeeded()
     }
     
     func setupViews() {
         self.view.backgroundColor = .white
+        self.spinnerView.backgroundColor = .white
         
         self.tableView.backgroundColor = .clear
         self.tableView.separatorStyle = .none
@@ -122,6 +137,16 @@ private extension MovieDetailsViewController {
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
+    }
+    
+    func showSpinner() {
+        self.view.bringSubviewToFront(self.spinnerView)
+        self.spinnerView.showSpinner()
+    }
+    
+    func hideSpinner() {
+        self.view.bringSubviewToFront(self.tableView)
+        self.spinnerView.hideSpinner()
     }
     
 }
@@ -139,8 +164,10 @@ extension MovieDetailsViewController: UITableViewDataSource {
         numberOfRowsInSection section: Int
     ) -> Int {
         switch DetailsSections.allCases[section] {
-        case .reviews: return self.viewModel.reviews.count
-        default: return 1
+        case .reviews where !self.viewModel.reviews.isEmpty :
+            return self.viewModel.reviews.count
+        default:
+            return 1
         }
     }
     
@@ -188,6 +215,12 @@ extension MovieDetailsViewController: UITableViewDataSource {
             cell = castCell
             
         case .reviews:
+            guard !self.viewModel.reviews.isEmpty else {
+                let emptyReviewCell = UITableViewCell()
+                emptyReviewCell.textLabel?.text = "Be first one to give a review!"
+                return emptyReviewCell
+            }
+            
             guard let reviewCell = tableView.dequeueReusableCell(
                 withIdentifier: section.cell.id,
                 for: indexPath) as? ReviewTableViewCell
@@ -216,6 +249,21 @@ extension MovieDetailsViewController: UITableViewDelegate {
         case .poster: return 200
         case .cast: return 180
         default: return UITableView.automaticDimension
+        }
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        willDisplayFooterView view: UIView,
+        forSection section: Int
+    ) {
+        guard section == DetailsSections.reviews.rawValue else { return }
+        
+        view.showSpinner()
+        self.viewModel.fetchReviews {
+            DispatchQueue.main.async {
+                tableView.reloadSections(IndexSet(integer: section), with: .automatic)
+            }
         }
     }
     

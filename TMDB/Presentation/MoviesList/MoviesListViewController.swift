@@ -22,6 +22,7 @@ class MoviesListViewController: UIViewController {
     // MARK: - Dependencies
     
     private let viewModel: MoviesListViewModel
+    private var bottomSpinnerViewHeightConstraint = NSLayoutConstraint()
     
     // MARK: - Properties
     
@@ -29,6 +30,10 @@ class MoviesListViewController: UIViewController {
         frame: .zero,
         collectionViewLayout: UICollectionViewFlowLayout()
     )
+    private let bottomSpinnerView = UIView()
+    private lazy var mainViewSubviews: [UIView] = {
+        return [self.collectionView, self.bottomSpinnerView]
+    }()
     
     // MARK: - Initializers
     
@@ -75,16 +80,33 @@ private extension MoviesListViewController {
     
     func setupLayout() {
         self.collectionView = .init(frame: self.view.frame, collectionViewLayout: UICollectionViewFlowLayout())
-        self.view.addSubview(self.collectionView)
-        self.collectionView.translatesAutoresizingMaskIntoConstraints = false
+        self.mainViewSubviews.forEach {
+            self.view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setupConstraints() {
+        self.bottomSpinnerViewHeightConstraint = .init(
+            item: self.bottomSpinnerView,
+            attribute: .height,
+            relatedBy: .equal,
+            toItem: nil,
+            attribute: .notAnAttribute,
+            multiplier: 1,
+            constant: 0
+        )
+        
         NSLayoutConstraint.activate([
             self.collectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             self.collectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.collectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+            
+            self.bottomSpinnerView.topAnchor.constraint(equalTo: self.collectionView.bottomAnchor),
+            self.bottomSpinnerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.bottomSpinnerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.bottomSpinnerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            self.bottomSpinnerViewHeightConstraint
         ])
     }
     
@@ -99,6 +121,20 @@ private extension MoviesListViewController {
         
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
+    }
+    
+    func showBottomSpinner() {
+        self.bottomSpinnerViewHeightConstraint.constant = 70
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+        self.bottomSpinnerView.showSpinner()
+    }
+    
+    func hideBottomSpinner() {
+        self.bottomSpinnerViewHeightConstraint.constant = 0
+        self.view.setNeedsLayout()
+        self.view.layoutIfNeeded()
+        self.bottomSpinnerView.hideSpinner()
     }
     
 }
@@ -133,6 +169,22 @@ extension MoviesListViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 
 extension MoviesListViewController: UICollectionViewDelegate {
+    
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        if indexPath.item == self.viewModel.movies.count - 1 {
+            self.showBottomSpinner()
+            self.viewModel.fetchMovies() { [weak self] in
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                    self?.hideBottomSpinner()
+                }
+            }
+        }
+    }
     
     func collectionView(
         _ collectionView: UICollectionView,
@@ -172,5 +224,32 @@ extension MoviesListViewController: UICollectionViewDelegateFlowLayout {
     ) -> CGFloat {
         Constants.interitemSpacing
     }
+    
+}
+
+// MARK: - UIScrollViewDelegate
+
+extension MoviesListViewController: UIScrollViewDelegate {
+    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let height = scrollView.frame.height
+//        let contentSizeHeight = scrollView.contentSize.height
+//        let offset = scrollView.contentOffset.y
+//        let reachedBottom = (offset + height == contentSizeHeight)
+//
+//        if reachedBottom {
+//            self.scrollViewDidReachBottom(scrollView)
+//        }
+//    }
+//
+//    func scrollViewDidReachBottom(_ scrollView: UIScrollView) {
+//        self.showBottomSpinner()
+//        self.viewModel.fetchMovies() { [weak self] in
+//            DispatchQueue.main.async {
+//                self?.collectionView.reloadData()
+//                self?.hideBottomSpinner()
+//            }
+//        }
+//    }
     
 }
