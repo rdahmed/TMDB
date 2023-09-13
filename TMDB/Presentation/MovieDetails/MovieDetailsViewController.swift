@@ -37,6 +37,12 @@ class MovieDetailsViewController: UIViewController {
     // MARK: - Dependencies
     
     private let viewModel: MovieDetailsViewModel
+    private var rating: Double? {
+        didSet {
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            appDelegate?.saveContext("MovieDetailsData", data: ["rating": self.rating])
+        }
+    }
     
     // MARK: - Properties
     
@@ -93,6 +99,7 @@ class MovieDetailsViewController: UIViewController {
                 self?.tableView.reloadSections(IndexSet(integer: 3), with: .automatic)
             }
         }
+        
     }
     
 }

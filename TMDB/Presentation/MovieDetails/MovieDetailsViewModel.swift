@@ -17,6 +17,7 @@ class MovieDetailsViewModel: ObservableObject {
     
     @Published var errorMessage: String?
     @Published var details: MovieDetails?
+    @Published var rating: Double?
     @Published var cast: [MovieCastMember] = []
     @Published var reviews: [MovieReview] = []
     
@@ -107,9 +108,7 @@ extension MovieDetailsViewModel: MovieDetailsViewModelInputProtocol {
         self.service.addRating(self.movieId, value: value) { result in
             switch result {
             case .success(let added):
-                if added {
-                    // TODO: Save in CoreData
-                } else {
+                if !added {
                     self.errorMessage = NetworkServiceError.emptyResponse.errorDescription
                 }
             case .failure(let error):
@@ -123,9 +122,7 @@ extension MovieDetailsViewModel: MovieDetailsViewModelInputProtocol {
         self.service.deleteRating(self.movieId) { result in
             switch result {
             case .success(let deleted):
-                if deleted {
-                    // TODO: Remove from CoreData
-                } else {
+                if !deleted {
                     self.errorMessage = NetworkServiceError.emptyResponse.errorDescription
                 }
             case .failure(let error):

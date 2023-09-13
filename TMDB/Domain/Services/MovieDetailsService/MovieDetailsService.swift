@@ -166,7 +166,7 @@ extension MovieDetailsService {
                 completionHandler(.failure(error))
             }
         } receiveValue: { result in
-            success = result.statusCode == 1
+            success = result.success
         }
         .store(in: &cancellables)
     }
