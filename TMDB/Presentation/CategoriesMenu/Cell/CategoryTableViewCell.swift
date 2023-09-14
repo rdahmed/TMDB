@@ -75,7 +75,7 @@ private extension CategoryTableViewCell {
         self.containerView.backgroundColor = .accentColor
         
         self.titleLabel.textAlignment = .center
-        self.titleLabel.textColor = .primaryTintColor
+        self.titleLabel.textColor = .white
         self.titleLabel.font = .systemFont(ofSize: 20, weight: .semibold)
     }
     

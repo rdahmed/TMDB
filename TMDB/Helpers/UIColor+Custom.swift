@@ -33,7 +33,6 @@ extension UIColor {
         alpha: 1
     )
     static let userScoreNoColor = UIColor.darkGray
-    static let primaryTintColor = UIColor.white
     static let primaryTextColor = UIColor.black
     static let secondaryTextColor = UIColor.darkGray
 }

@@ -40,16 +40,17 @@ class MovieDetailsViewController: UIViewController {
     private var rating: Double? {
         didSet {
             let appDelegate = UIApplication.shared.delegate as? AppDelegate
-            appDelegate?.saveContext("MovieDetailsData", data: ["rating": self.rating])
+            appDelegate?.saveContext(.movieDetails, data: [.rating: self.rating])
         }
     }
     
     // MARK: - Properties
     
+    private let ratingView = RatingView()
     private let tableView = UITableView(frame: .zero, style: .plain)
     private let spinnerView = UIView()
     private lazy var mainViewSubviews: [UIView] = {
-        return [self.tableView, self.spinnerView]
+        return [self.ratingView, self.tableView, self.spinnerView]
     }()
     
     // MARK: - Initializers
@@ -117,6 +118,11 @@ private extension MovieDetailsViewController {
     
     func setupConstraints() {
         NSLayoutConstraint.activate([
+            self.ratingView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.ratingView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.ratingView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.ratingView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            
             self.tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
@@ -133,9 +139,13 @@ private extension MovieDetailsViewController {
     
     func setupViews() {
         self.view.backgroundColor = .white
+        self.ratingView.delegate = self
         self.spinnerView.backgroundColor = .white
-        
-        self.tableView.backgroundColor = .clear
+        self.setupTableView()
+    }
+    
+    func setupTableView() {
+        self.tableView.backgroundColor = .white
         self.tableView.separatorStyle = .none
         
         DetailsSections.allCases.forEach {
@@ -200,7 +210,9 @@ extension MovieDetailsViewController: UITableViewDataSource {
                 for: indexPath) as? PosterTableViewCell
             else { return .init() }
             
+            posterCell.isMovieRated = (self.rating != nil)
             posterCell.details = self.viewModel.details
+            posterCell.delegate = self
             cell = posterCell
             
         case .overview:
@@ -274,4 +286,42 @@ extension MovieDetailsViewController: UITableViewDelegate {
         }
     }
     
+}
+
+// MARK: - HeaderCellDelegate
+
+extension MovieDetailsViewController: HeaderCellDelegate {
+    
+    func didTapRatingButton() {
+        self.view.bringSubviewToFront(self.ratingView)
+    }
+    
+}
+
+// MARK: - RatingViewDelegate
+
+extension MovieDetailsViewController: RatingViewDelegate {
+    
+    func dimissRatingView(_ rating: Double?) {
+        self.showSpinner()
+        
+        guard let rating else {
+            self.viewModel.deleteRating { [weak self] in
+                DispatchQueue.main.async {
+                    self?.rating = nil
+                    self?.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+                    self?.hideSpinner()
+                }
+            }
+            return
+        }
+        
+        self.viewModel.addRating(rating) { [weak self] in
+            DispatchQueue.main.async {
+                self?.rating = rating
+                self?.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+                self?.hideSpinner()
+            }
+        }
+    }
 }

@@ -50,11 +50,10 @@ private extension UserScoreView {
     
     func setupLayout() {
         self.addSubview(self.userScoreLabel)
+        self.userScoreLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     
     func setupConstraints() {
-        self.userScoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             self.userScoreLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
             self.userScoreLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
@@ -65,7 +64,7 @@ private extension UserScoreView {
         self.backgroundColor = .accentColor
 
         self.userScoreLabel.textAlignment = .center
-        self.userScoreLabel.textColor = .primaryTintColor
+        self.userScoreLabel.textColor = .white
         self.userScoreLabel.font = .systemFont(ofSize: 10, weight: .semibold)
     }
     

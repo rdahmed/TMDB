@@ -47,11 +47,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Core Data Saving support
 
-    func saveContext(_ entityName: String?, data: [String: Any?]) {
+    func saveContext(_ coreDataEntity: CoreDataEntity?, data: [CoreDataAttribute: Any?]) {
         let context = self.persistentContainer.viewContext
         
         guard
-            let entityName,
+            let entityName = coreDataEntity?.rawValue,
             let entity = NSEntityDescription.entity(
             forEntityName: entityName,
             in: context
@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         data.keys.forEach {
             if let value = data[$0] {
-                object.setValue(value, forKey: $0)
+                object.setValue(value, forKey: $0.rawValue)
             }
         }
                 

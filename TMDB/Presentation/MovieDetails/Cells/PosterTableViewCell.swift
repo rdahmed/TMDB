@@ -7,16 +7,26 @@
 
 import UIKit
 
+protocol HeaderCellDelegate: AnyObject {
+    func didTapRatingButton()
+}
+
 class PosterTableViewCell: UITableViewCell {
     
     // MARK: - Dependencies
     
+    var isMovieRated = false {
+        didSet {
+            self.ratingButton.configuration?.baseForegroundColor = self.isMovieRated ? .yellow : .white
+        }
+    }
     var details: MovieDetails? {
         didSet {
             guard let details else { return }
             self.updateUI(details)
         }
     }
+    var delegate: HeaderCellDelegate?
     
     // MARK: - Properties
     
@@ -27,7 +37,7 @@ class PosterTableViewCell: UITableViewCell {
     private let detailsLabel = UILabel()
     private let userScoreView = UserScoreView()
     private let userScoreLabel = UILabel()
-    private let rateButton = UIButton()
+    private let ratingButton = UIButton()
     private lazy var contentViewSubviews: [UIView] = {
         return [
             self.backdropImageView,
@@ -37,7 +47,7 @@ class PosterTableViewCell: UITableViewCell {
             self.detailsLabel,
             self.userScoreView,
             self.userScoreLabel,
-            self.rateButton
+            self.ratingButton
         ]
     }()
     
@@ -101,10 +111,10 @@ private extension PosterTableViewCell {
             self.userScoreLabel.centerYAnchor.constraint(equalTo: self.userScoreView.centerYAnchor),
             self.userScoreLabel.leadingAnchor.constraint(equalTo: self.userScoreView.trailingAnchor, constant: 2),
             
-            self.rateButton.heightAnchor.constraint(equalToConstant: 40),
-            self.rateButton.widthAnchor.constraint(equalToConstant: 40),
-            self.rateButton.centerYAnchor.constraint(equalTo: self.userScoreView.centerYAnchor),
-            self.rateButton.leadingAnchor.constraint(equalTo: self.userScoreLabel.trailingAnchor, constant: 8)
+            self.ratingButton.heightAnchor.constraint(equalToConstant: 40),
+            self.ratingButton.widthAnchor.constraint(equalToConstant: 40),
+            self.ratingButton.centerYAnchor.constraint(equalTo: self.userScoreView.centerYAnchor),
+            self.ratingButton.leadingAnchor.constraint(equalTo: self.userScoreLabel.trailingAnchor, constant: 8)
         ])
         
         self.contentView.layoutIfNeeded()
@@ -115,7 +125,7 @@ private extension PosterTableViewCell {
         self.setupTitleLabel()
         self.setupDetailsLabel()
         self.setupUserScoreView()
-        self.setupRateButton()
+        self.setupRatingButton()
     }
     
     func setupImages() {
@@ -130,14 +140,14 @@ private extension PosterTableViewCell {
     
     func setupTitleLabel() {
         self.titleLabel.textAlignment = .left
-        self.titleLabel.textColor = .primaryTintColor
+        self.titleLabel.textColor = .white
         self.titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
     }
     
     func setupDetailsLabel() {
         self.detailsLabel.numberOfLines = 2
         self.detailsLabel.textAlignment = .left
-        self.detailsLabel.textColor = .primaryTintColor
+        self.detailsLabel.textColor = .white
         self.detailsLabel.font = .systemFont(ofSize: 12, weight: .medium)
     }
     
@@ -147,33 +157,27 @@ private extension PosterTableViewCell {
         
         self.userScoreLabel.numberOfLines = 2
         self.userScoreLabel.textAlignment = .left
-        self.userScoreLabel.textColor = .primaryTintColor
+        self.userScoreLabel.textColor = .white
         self.userScoreLabel.font = .systemFont(ofSize: 16, weight: .semibold)
         self.userScoreLabel.text = "User\nScore"
     }
     
-    func setupRateButton() {
-        self.rateButton.circular()
+    func setupRatingButton() {
+        self.ratingButton.circular()
         
         var config = UIButton.Configuration.filled()
-        let starImage = UIImage(systemName: "star.fill")?.withTintColor(.primaryTintColor)
+        let starImage = UIImage(systemName: "star.fill")?.withTintColor(.white)
         config.image = starImage
         config.preferredSymbolConfigurationForImage = .init(pointSize: 10)
         config.baseBackgroundColor = .accentColor.withAlphaComponent(0.8)
+        self.ratingButton.configuration = config
         
-        self.rateButton.configuration = config
-        
-//        self.rateButton.backgroundColor = .accentColor.withAlphaComponent(0.8)
-//        self.rateButton.tintColor = .primaryTintColor
-//
-//        self.rateButton.setImage(starImage, for: .normal)
-        
-        self.rateButton.addTarget(self, action: #selector(rateButtonTapped), for: .touchUpInside)
+        self.ratingButton.addTarget(self, action: #selector(self.ratingButtonTapped), for: .touchUpInside)
     }
     
     @objc
-    func rateButtonTapped() {
-        // TODO: Rate movie logic
+    func ratingButtonTapped() {
+        self.delegate?.didTapRatingButton()
     }
     
     func updateUI(_ details: MovieDetails) {

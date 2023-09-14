@@ -143,7 +143,7 @@ private extension ReviewTableViewCell {
         self.reviewerImageView.backgroundColor = self.randomColor
         
         self.reviewerFirstLabel.textAlignment = .center
-        self.reviewerFirstLabel.textColor = .primaryTintColor
+        self.reviewerFirstLabel.textColor = .white
         self.reviewerFirstLabel.font = .systemFont(ofSize: 20)
     }
     
@@ -157,10 +157,10 @@ private extension ReviewTableViewCell {
         self.ratingView.rounded()
         self.ratingView.backgroundColor = .black
         
-        self.starImageView.tintColor = .primaryTintColor
+        self.starImageView.tintColor = .white
         
         self.ratingLabel.textAlignment = .center
-        self.ratingLabel.textColor = .primaryTintColor
+        self.ratingLabel.textColor = .white
         self.ratingLabel.font = .systemFont(ofSize: 12, weight: .medium)
     }
     

@@ -28,12 +28,12 @@ class DefaultNavigationController: UINavigationController {
         appearance.configureWithOpaqueBackground()
         appearance.shadowColor = .clear
         appearance.backgroundColor = .accentColor
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.primaryTintColor]
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         appearance.backButtonAppearance = backButtonAppearance
         
         self.navigationBar.standardAppearance = appearance
         self.navigationBar.scrollEdgeAppearance = appearance
-        self.navigationBar.tintColor = .primaryTintColor
+        self.navigationBar.tintColor = .white
         self.navigationBar.topItem?.backButtonDisplayMode = .minimal
     }
     
