@@ -11,6 +11,11 @@ struct MovieCreditsDTO: Decodable {
     let id: Int
     let cast: [MovieCastMemberDTO]
     
+    init(id: Int, cast: [MovieCastMemberDTO]) {
+        self.id = id
+        self.cast = cast
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case cast
@@ -28,6 +33,16 @@ struct MovieCastMemberDTO: Decodable {
     let name: String
     let character: String
     let profilePath: String?
+    
+    init(
+        name: String,
+        character: String,
+        profilePath: String?
+    ) {
+        self.name = name
+        self.character = character
+        self.profilePath = profilePath
+    }
     
     enum CodingKeys: String, CodingKey {
         case name

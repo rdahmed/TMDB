@@ -84,7 +84,7 @@ extension MoviesService {
     }
 }
 
-extension MoviesService {
+private extension MoviesService {
     func storedMovies(
     _ publisher: MoviesPublisher<MoviesDTO>,
     completionHandler: @escaping ((Result<Movies?, Error>) -> Void)

@@ -8,10 +8,22 @@
 import Foundation
 
 struct MovieReviewsDTO: Decodable {
-    let page : Int
+    let page: Int
     let noOfPages: Int
     let noOfReviews: Int
     let reviews: [MovieReviewDTO]
+    
+    init(
+        page: Int,
+        noOfPages: Int,
+        noOfReviews: Int,
+        reviews: [MovieReviewDTO]
+    ) {
+        self.page = page
+        self.noOfPages = noOfPages
+        self.noOfReviews = noOfReviews
+        self.reviews = reviews
+    }
     
     enum CodingKeys: String, CodingKey {
         case page
@@ -37,6 +49,22 @@ struct MovieReviewDTO: Decodable {
     let creatingDate: String
     let updatingDate: String?
     let rating: Int?
+    
+    init(
+        id: String,
+        authorName: String,
+        content: String,
+        creatingDate: String,
+        updatingDate: String?,
+        rating: Int?
+    ) {
+        self.id = id
+        self.authorName = authorName
+        self.content = content
+        self.creatingDate = creatingDate
+        self.updatingDate = updatingDate
+        self.rating = rating
+    }
     
     enum AutherKey: String, CodingKey {
         case author = "author_details"

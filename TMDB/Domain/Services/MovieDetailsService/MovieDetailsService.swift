@@ -29,18 +29,6 @@ extension MovieDetailsService {
         }
     }
     
-    func getSimilar(
-        to id: Int,
-        completionHandler: @escaping ((Result<MovieDetails?, Error>) -> Void)
-    ) {
-        let publisher: MoviesPublisher<MovieDetailsDTO> = self.jsonTranspost.get(
-            route: .getSimilar(id: "\(id)")
-        )
-        self.storedMovieDetails(publisher) { result in
-            completionHandler(result)
-        }
-    }
-    
     func getCredits(
         _ id: Int,
         completionHandler: @escaping ((Result<MovieCast?, Error>) -> Void)
@@ -94,7 +82,7 @@ extension MovieDetailsService {
     }
 }
 
-extension MovieDetailsService {
+private extension MovieDetailsService {
     func storedMovieDetails(
     _ publisher: MoviesPublisher<MovieDetailsDTO>,
     completionHandler: @escaping ((Result<MovieDetails?, Error>) -> Void)

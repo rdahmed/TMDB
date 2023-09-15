@@ -12,10 +12,6 @@ protocol MovieDetailsServiceProtocol {
         _ id: Int,
         completionHandler: @escaping ((Result<MovieDetails?, Error>) -> Void)
     )
-    func getSimilar(
-        to id: Int,
-        completionHandler: @escaping ((Result<MovieDetails?, Error>) -> Void)
-    )
     func getCredits(
         _ id: Int,
         completionHandler: @escaping ((Result<MovieCast?, Error>) -> Void)

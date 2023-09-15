@@ -8,10 +8,22 @@
 import Foundation
 
 struct MoviesDTO: Decodable {
-    let page : Int
+    let page: Int
     let noOfPages: Int
     let noOfMovies: Int
     let movies: [MovieDTO]
+    
+    init(
+        page: Int,
+        noOfPages: Int,
+        noOfMovies: Int,
+        movies: [MovieDTO]
+    ) {
+        self.page = page
+        self.noOfPages = noOfPages
+        self.noOfMovies = noOfMovies
+        self.movies = movies
+    }
     
     enum CodingKeys: String, CodingKey {
         case page
@@ -36,6 +48,20 @@ struct MovieDTO: Decodable {
     let releaseDate: String
     let posterPath: String?
     let averageVote: Double?
+    
+    init(
+        id: Int,
+        title: String,
+        releaseDate: String,
+        posterPath: String?,
+        averageVote: Double?
+    ) {
+        self.id = id
+        self.title = title
+        self.releaseDate = releaseDate
+        self.posterPath = posterPath
+        self.averageVote = averageVote
+    }
     
     enum CodingKeys: String, CodingKey {
         case id
