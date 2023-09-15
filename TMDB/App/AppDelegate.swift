@@ -10,6 +10,10 @@ import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    static var shared: AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
 
     func application(
         _ application: UIApplication,
@@ -47,24 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Core Data Saving support
 
-    func saveContext(_ coreDataEntity: CoreDataEntity?, data: [CoreDataAttribute: Any?]) {
+    func saveContext() {
         let context = self.persistentContainer.viewContext
         
-        guard
-            let entityName = coreDataEntity?.rawValue,
-            let entity = NSEntityDescription.entity(
-            forEntityName: entityName,
-            in: context
-        ) else { return }
-        
-        let object = NSManagedObject(entity: entity, insertInto: context)
-        
-        data.keys.forEach {
-            if let value = data[$0] {
-                object.setValue(value, forKey: $0.rawValue)
-            }
-        }
-                
         if context.hasChanges {
             do {
                 try context.save()
@@ -72,6 +61,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    var managedObjectContext: NSManagedObjectContext {
+        return persistentContainer.viewContext
     }
 
 }

@@ -47,6 +47,8 @@ class MovieDetailsViewModel: ObservableObject {
 extension MovieDetailsViewModel: MovieDetailsViewModelInputProtocol {
     
     func fetchDetails(completion: (() -> Void)?) {
+        self.rating = MoviesRatingsLocalStore.default.ratings[self.movieId]
+        
         self.service.getDetails(self.movieId) { result in
             switch result {
             case .success(let details):
@@ -108,7 +110,10 @@ extension MovieDetailsViewModel: MovieDetailsViewModelInputProtocol {
         self.service.addRating(self.movieId, value: value) { result in
             switch result {
             case .success(let added):
-                if !added {
+                if added {
+                    self.rating = value
+                    MoviesRatingsLocalStore.default.ratings[self.movieId] = value
+                } else {
                     self.errorMessage = NetworkServiceError.emptyResponse.errorDescription
                 }
             case .failure(let error):
@@ -122,7 +127,10 @@ extension MovieDetailsViewModel: MovieDetailsViewModelInputProtocol {
         self.service.deleteRating(self.movieId) { result in
             switch result {
             case .success(let deleted):
-                if !deleted {
+                if deleted {
+                    self.rating = nil
+                    MoviesRatingsLocalStore.default.ratings.removeValue(forKey: self.movieId)
+                } else {
                     self.errorMessage = NetworkServiceError.emptyResponse.errorDescription
                 }
             case .failure(let error):

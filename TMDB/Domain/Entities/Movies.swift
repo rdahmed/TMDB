@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct Movies {
     let noOfPages: Int
@@ -17,7 +18,7 @@ struct Movies {
     }
 }
 
-struct Movie: Decodable {
+struct Movie: Codable {
     let id: Int
     let title: String
     let releaseDate: String
@@ -37,5 +38,29 @@ struct Movie: Decodable {
             self.posterData = nil
         }   
         self.averageVote = dto.averageVote
+    }
+}
+
+extension Movie: CoreDataModel {
+    init(managedObject: NSManagedObject) {
+        self.id = managedObject.value(forKey: "id") as? Int ?? 0
+        self.title = managedObject.value(forKey: "title") as? String ?? .empty
+        self.releaseDate = managedObject.value(forKey: "releaseDate") as? String ?? Date().formatted()
+        self.posterData = managedObject.value(forKey: "posterData") as? Data
+        self.averageVote = managedObject.value(forKey: "averageVote") as? Double
+    }
+    
+    func mapToManagedObject(
+        entity: NSEntityDescription,
+        insertInto: NSManagedObjectContext
+    ) -> NSManagedObject {
+        let managedObject = NSManagedObject(entity: entity, insertInto: insertInto)
+        managedObject.setValue(self.id, forKey: "id")
+        managedObject.setValue(self.title, forKey: "title")
+        managedObject.setValue(self.releaseDate, forKey: "releaseDate")
+        managedObject.setValue(self.posterData, forKey: "posterData")
+        managedObject.setValue(self.averageVote, forKey: "averageVote")
+        
+        return managedObject
     }
 }

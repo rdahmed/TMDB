@@ -37,12 +37,6 @@ class MovieDetailsViewController: UIViewController {
     // MARK: - Dependencies
     
     private let viewModel: MovieDetailsViewModel
-    private var rating: Double? {
-        didSet {
-            let appDelegate = UIApplication.shared.delegate as? AppDelegate
-            appDelegate?.saveContext(.movieDetails, data: [.rating: self.rating])
-        }
-    }
     
     // MARK: - Properties
     
@@ -80,7 +74,7 @@ class MovieDetailsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+                
         self.showSpinner()
         self.viewModel.fetchDetails { [weak self] in
             DispatchQueue.main.async {
@@ -210,7 +204,7 @@ extension MovieDetailsViewController: UITableViewDataSource {
                 for: indexPath) as? PosterTableViewCell
             else { return .init() }
             
-            posterCell.isMovieRated = (self.rating != nil)
+            posterCell.isMovieRated = (self.viewModel.rating != nil)
             posterCell.details = self.viewModel.details
             posterCell.delegate = self
             cell = posterCell
@@ -293,6 +287,7 @@ extension MovieDetailsViewController: UITableViewDelegate {
 extension MovieDetailsViewController: HeaderCellDelegate {
     
     func didTapRatingButton() {
+        self.ratingView.rating = self.viewModel.rating
         self.view.bringSubviewToFront(self.ratingView)
     }
     
@@ -308,8 +303,7 @@ extension MovieDetailsViewController: RatingViewDelegate {
         guard let rating else {
             self.viewModel.deleteRating { [weak self] in
                 DispatchQueue.main.async {
-                    self?.rating = nil
-                    self?.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+                    self?.updateUI(nil)
                     self?.hideSpinner()
                 }
             }
@@ -318,10 +312,14 @@ extension MovieDetailsViewController: RatingViewDelegate {
         
         self.viewModel.addRating(rating) { [weak self] in
             DispatchQueue.main.async {
-                self?.rating = rating
-                self?.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+                self?.updateUI(rating)
                 self?.hideSpinner()
             }
         }
     }
+    
+    private func updateUI(_ rating: Double?) {
+        self.tableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+    }
+    
 }
