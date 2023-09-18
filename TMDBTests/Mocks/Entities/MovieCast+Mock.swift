@@ -8,13 +8,13 @@
 @testable import TMDB
 
 extension MovieCast {
-    static var mock: Self {
+    static var mock: MovieCast {
         return [.init(dto: .mock1), .init(dto: .mock2)]
     }
 }
 
 extension MovieCastMemberDTO {
-    static var mock1: Self {
+    static var mock1: MovieCastMemberDTO {
         .init(
             name: "Chris Pratt",
             character: "Mario (voice)",

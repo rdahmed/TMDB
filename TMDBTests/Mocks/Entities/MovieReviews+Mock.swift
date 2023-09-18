@@ -8,24 +8,24 @@
 @testable import TMDB
 
 extension MovieReviews {
-    static var mock: Self {
+    static var mock: MovieReviews {
         return .init(dto: .mock)
     }
 }
 
 extension MovieReviewsDTO {
-    static var mock: Self {
+    static var mock: MovieReviewsDTO {
         return .init(
             page: 1,
             noOfPages: 1,
             noOfReviews: 1,
-            reviews: [.mock],
+            reviews: [.mock]
         )
     }
 }
 
 extension MovieReviewDTO {
-    static var mock: Self {
+    static var mock: MovieReviewDTO {
         return .init(
             id: "646bbf8ed1857201802df9c0",
             authorName: "holdenc",

@@ -45,7 +45,15 @@ class CastMemberCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.memberImageView.image = nil
+    }
+    
 }
+
+// MARK: - UI Setup
 
 private extension CastMemberCollectionViewCell {
     
@@ -106,14 +114,17 @@ private extension CastMemberCollectionViewCell {
     }
     
     func updateUI(_ castMember: MovieCastMember) {
-        if let profileData = castMember.profileData,
-           let profileImage = UIImage(data: profileData)
-        {
-            self.memberImageView.image = profileImage
-        } else {
-            self.memberImageView.image = UIImage(systemName: "person.fill")
-            self.memberImageView.tintColor = .lightGray
+        self.memberImageView.showSpinner()
+        UIImage.download(from: castMember.profileURL) { profileURL in
+            if let profileURL {
+                self.memberImageView.image = profileURL
+            } else {
+                self.memberImageView.image = UIImage(systemName: "person.fill")
+                self.memberImageView.tintColor = .lightGray
+            }
+            self.memberImageView.hideSpinner()
         }
+        
         self.memberNameLabel.text = castMember.name
         self.characterNameLabel.text = castMember.character
     }

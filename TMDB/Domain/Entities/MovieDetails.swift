@@ -14,8 +14,8 @@ struct MovieDetails {
     let genres: [String]?
     let duration: String
     let overview: String
-    let posterData: Data?
-    let backdropData: Data?
+    let posterURL: URL?
+    let backdropURL: URL?
     let averageVote: Double?
     
     init(dto: MovieDetailsDTO) {
@@ -25,21 +25,15 @@ struct MovieDetails {
         self.genres = dto.genres?.map(\.name)
         self.duration = "\(Int(dto.duration / 60))h \(dto.duration % 60)m"
         self.overview = dto.overview
-        if let posterPath = dto.posterPath,
-           let posterURL = URL(string: HTTPConfig.imageBaseURL + posterPath),
-           let data = try? Data(contentsOf: posterURL)
-        {
-            self.posterData = data
+        if let posterPath = dto.posterPath {
+            self.posterURL = URL(string: HTTPConfig.imageBaseURL + posterPath)
         } else {
-            self.posterData = nil
+            self.posterURL = nil
         }
-        if let backdropPath = dto.backdropPath,
-           let backdropURL = URL(string: HTTPConfig.imageBaseURL + backdropPath),
-           let data = try? Data(contentsOf: backdropURL)
-        {
-            self.backdropData = data
+        if let backdropPath = dto.backdropPath {
+            self.backdropURL = URL(string: HTTPConfig.imageBaseURL + backdropPath)
         } else {
-            self.backdropData = nil
+            self.backdropURL = nil
         }
         self.averageVote = dto.averageVote
     }

@@ -70,6 +70,8 @@ class ReviewTableViewCell: UITableViewCell {
     
 }
 
+// MARK: - UI Setup
+
 private extension ReviewTableViewCell {
     
     func setupLayout() {

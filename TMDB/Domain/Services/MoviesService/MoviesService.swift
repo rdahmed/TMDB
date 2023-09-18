@@ -91,6 +91,7 @@ private extension MoviesService {
     ) {
         var movies: Movies?
         publisher
+            .receive(on: DispatchQueue.main)
             .sink { completion in
             switch completion {
             case .finished:

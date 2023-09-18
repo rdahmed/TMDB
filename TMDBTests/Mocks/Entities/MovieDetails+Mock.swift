@@ -8,13 +8,13 @@
 @testable import TMDB
 
 extension MovieDetails {
-    static var mock: Self {
+    static var mock: MovieDetails {
         return .init(dto: .mock)
     }
 }
 
 extension MovieDetailsDTO {
-    static var mock: Self {
+    static var mock: MovieDetailsDTO {
         return .init(
             id: 502356,
             title: "The Super Mario Bros",

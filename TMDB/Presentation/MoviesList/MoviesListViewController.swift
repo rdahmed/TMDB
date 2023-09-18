@@ -65,10 +65,8 @@ class MoviesListViewController: UIViewController {
         
         self.view.showSpinner()
         self.viewModel.fetchMovies() { [weak self] in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
-                self?.view.hideSpinner()
-            }
+            self?.collectionView.reloadData()
+            self?.view.hideSpinner()
         }
     }
     
@@ -178,10 +176,8 @@ extension MoviesListViewController: UICollectionViewDelegate {
         if indexPath.item == self.viewModel.movies.count - 1 {
             self.showBottomSpinner()
             self.viewModel.fetchMovies() { [weak self] in
-                DispatchQueue.main.async {
-                    self?.collectionView.reloadData()
-                    self?.hideBottomSpinner()
-                }
+                self?.collectionView.reloadData()
+                self?.hideBottomSpinner()
             }
         }
     }
@@ -224,32 +220,5 @@ extension MoviesListViewController: UICollectionViewDelegateFlowLayout {
     ) -> CGFloat {
         Constants.interitemSpacing
     }
-    
-}
-
-// MARK: - UIScrollViewDelegate
-
-extension MoviesListViewController: UIScrollViewDelegate {
-    
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let height = scrollView.frame.height
-//        let contentSizeHeight = scrollView.contentSize.height
-//        let offset = scrollView.contentOffset.y
-//        let reachedBottom = (offset + height == contentSizeHeight)
-//
-//        if reachedBottom {
-//            self.scrollViewDidReachBottom(scrollView)
-//        }
-//    }
-//
-//    func scrollViewDidReachBottom(_ scrollView: UIScrollView) {
-//        self.showBottomSpinner()
-//        self.viewModel.fetchMovies() { [weak self] in
-//            DispatchQueue.main.async {
-//                self?.collectionView.reloadData()
-//                self?.hideBottomSpinner()
-//            }
-//        }
-//    }
     
 }

@@ -65,6 +65,13 @@ class PosterTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.backdropImageView.image = nil
+        self.posterImageView.image = nil
+    }
+    
 }
 
 // MARK: - UI Setup
@@ -181,12 +188,23 @@ private extension PosterTableViewCell {
     }
     
     func updateUI(_ details: MovieDetails) {
-        if let backdropData = details.backdropData {
-            self.backdropImageView.image = UIImage(data: backdropData)
+        self.backdropImageView.showSpinner()
+        UIImage.download(from: details.backdropURL) { backdropImage in
+            if let backdropImage {
+                self.backdropImageView.image = backdropImage
+            }
+            self.backdropImageView.hideSpinner()
         }
         
-        if let posterData = details.posterData {
-            self.posterImageView.image = UIImage(data: posterData)
+        self.posterImageView.showSpinner()
+        UIImage.download(from: details.posterURL) { posterImage in
+            if let posterImage {
+                self.posterImageView.image = posterImage
+            } else {
+                self.posterImageView.image = UIImage(systemName: "popcorn")
+                self.posterImageView.tintColor = .lightGray
+            }
+            self.posterImageView.hideSpinner()
         }
         
         self.titleLabel.text = details.title

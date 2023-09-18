@@ -44,6 +44,8 @@ class CastTableViewCell: UITableViewCell {
     
 }
 
+// MARK: - UI Setup
+
 private extension CastTableViewCell {
     
     func setupLayout() {

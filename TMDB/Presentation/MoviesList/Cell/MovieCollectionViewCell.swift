@@ -47,6 +47,12 @@ class MovieCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.posterImageView.image = nil
+    }
+    
 }
 
 // MARK: - UI Setup
@@ -118,13 +124,15 @@ private extension MovieCollectionViewCell {
     }
     
     func updateUI(_ movie: Movie) {
-        if let posterData = movie.posterData,
-           let posterImage = UIImage(data: posterData)
-        {
-            self.posterImageView.image = posterImage
-        } else {
-            self.posterImageView.image = UIImage(systemName: "popcorn")
-            self.posterImageView.tintColor = .lightGray
+        self.posterImageView.showSpinner()
+        UIImage.download(from: movie.posterURL) { posterImage in
+            if let posterImage {
+                self.posterImageView.image = posterImage
+            } else {
+                self.posterImageView.image = UIImage(systemName: "popcorn")
+                self.posterImageView.tintColor = .lightGray
+            }
+            self.posterImageView.hideSpinner()
         }
         
         self.userScoreView.vote = movie.averageVote

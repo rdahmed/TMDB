@@ -89,6 +89,7 @@ private extension MovieDetailsService {
     ) {
         var details: MovieDetails?
         publisher
+            .receive(on: DispatchQueue.main)
             .sink { completion in
             switch completion {
             case .finished:
@@ -108,6 +109,7 @@ private extension MovieDetailsService {
     ) {
         var cast: MovieCast?
         publisher
+            .receive(on: DispatchQueue.main)
             .sink { completion in
             switch completion {
             case .finished:
@@ -127,6 +129,7 @@ private extension MovieDetailsService {
     ) {
         var reviews: MovieReviews?
         publisher
+            .receive(on: DispatchQueue.main)
             .sink { completion in
             switch completion {
             case .finished:
@@ -146,6 +149,7 @@ private extension MovieDetailsService {
     ) {
         var success = false
         publisher
+            .receive(on: DispatchQueue.main)
             .sink { completion in
             switch completion {
             case .finished:

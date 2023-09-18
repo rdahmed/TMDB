@@ -77,22 +77,16 @@ class MovieDetailsViewController: UIViewController {
                 
         self.showSpinner()
         self.viewModel.fetchDetails { [weak self] in
-            DispatchQueue.main.async {
-                self?.tableView.reloadSections(IndexSet(arrayLiteral: 0, 1), with: .automatic)
-                self?.hideSpinner()
-            }
+            self?.tableView.reloadSections(IndexSet(arrayLiteral: 0, 1), with: .automatic)
+            self?.hideSpinner()
         }
         
         self.viewModel.fetchCredits { [weak self] in
-            DispatchQueue.main.async {
-                self?.tableView.reloadSections(IndexSet(integer: 2), with: .automatic)
-            }
+            self?.tableView.reloadSections(IndexSet(integer: 2), with: .automatic)
         }
         
         self.viewModel.fetchReviews { [weak self] in
-            DispatchQueue.main.async {
-                self?.tableView.reloadSections(IndexSet(integer: 3), with: .automatic)
-            }
+            self?.tableView.reloadSections(IndexSet(integer: 3), with: .automatic)
         }
         
     }
@@ -302,19 +296,15 @@ extension MovieDetailsViewController: RatingViewDelegate {
         
         guard let rating else {
             self.viewModel.deleteRating { [weak self] in
-                DispatchQueue.main.async {
-                    self?.updateUI(nil)
-                    self?.hideSpinner()
-                }
+                self?.updateUI(nil)
+                self?.hideSpinner()
             }
             return
         }
         
         self.viewModel.addRating(rating) { [weak self] in
-            DispatchQueue.main.async {
-                self?.updateUI(rating)
-                self?.hideSpinner()
-            }
+            self?.updateUI(rating)
+            self?.hideSpinner()
         }
     }
     
