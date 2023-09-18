@@ -98,9 +98,62 @@ final class MoviesListViewModelTests: XCTestCase {
         XCTAssertEqual(self.sut.movies, Movies.mock.movies)
     }
     
-    func testServiceIsCalled_whenFetchServiceIsFailed() {
+    func testServiceIsCalled_whenFetchNowPlayingMoviesIsFailed() {
         // Given
         self.service.error = ErrorMock.fakeError
+        self.sut = .init(
+            category: .nowPlaying,
+            service: self.service,
+            router: self.router
+        )
+        
+        // When
+        self.sut.fetchMovies { /* NOTHING TO DO HERE */ }
+        
+        // Assert
+        XCTAssertEqual(self.sut.errorMessage, ErrorMock.fakeError.localizedDescription)
+    }
+    
+    func testServiceIsCalled_whenFetchPopularMoviesIsFailed() {
+        // Given
+        self.service.error = ErrorMock.fakeError
+        self.sut = .init(
+            category: .popular,
+            service: self.service,
+            router: self.router
+        )
+        
+        // When
+        self.sut.fetchMovies { /* NOTHING TO DO HERE */ }
+        
+        // Assert
+        XCTAssertEqual(self.sut.errorMessage, ErrorMock.fakeError.localizedDescription)
+    }
+    
+    func testServiceIsCalled_whenFetchTopRatedMoviesIsFailed() {
+        // Given
+        self.service.error = ErrorMock.fakeError
+        self.sut = .init(
+            category: .topRated,
+            service: self.service,
+            router: self.router
+        )
+        
+        // When
+        self.sut.fetchMovies { /* NOTHING TO DO HERE */ }
+        
+        // Assert
+        XCTAssertEqual(self.sut.errorMessage, ErrorMock.fakeError.localizedDescription)
+    }
+    
+    func testServiceIsCalled_whenFetchUpcomingMoviesIsFailed() {
+        // Given
+        self.service.error = ErrorMock.fakeError
+        self.sut = .init(
+            category: .upcoming,
+            service: self.service,
+            router: self.router
+        )
         
         // When
         self.sut.fetchMovies { /* NOTHING TO DO HERE */ }
