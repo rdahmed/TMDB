@@ -13,6 +13,12 @@ extension MovieDetails {
     }
 }
 
+extension MovieDetails: Equatable {
+    public static func == (lhs: MovieDetails, rhs: MovieDetails) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
 extension MovieDetailsDTO {
     static var mock: MovieDetailsDTO {
         return .init(

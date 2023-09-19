@@ -28,7 +28,7 @@ final class MoviesListViewModelTests: XCTestCase {
         self.sut = nil
     }
     
-    // MARK: - Service Calls Tests
+    // MARK: - Service Calls Tests (Success)
     
     func testServiceIsCalled_whenFetchNowPlayingMoviesIsCalled() {
         // Given
@@ -40,7 +40,7 @@ final class MoviesListViewModelTests: XCTestCase {
         )
         
         // When
-        self.sut.fetchMovies { /* NOTHING TO DO HERE */ }
+        self.sut.fetchMovies()
         
         // Assert
         XCTAssertTrue(self.service.getNowPlayingCalled)
@@ -57,7 +57,7 @@ final class MoviesListViewModelTests: XCTestCase {
         )
         
         // When
-        self.sut.fetchMovies { /* NOTHING TO DO HERE */ }
+        self.sut.fetchMovies()
         
         // Assert
         XCTAssertTrue(self.service.getPopularCalled)
@@ -91,12 +91,14 @@ final class MoviesListViewModelTests: XCTestCase {
         )
         
         // When
-        self.sut.fetchMovies { /* NOTHING TO DO HERE */ }
+        self.sut.fetchMovies()
         
         // Assert
         XCTAssertTrue(self.service.getUpcomingCalled)
         XCTAssertEqual(self.sut.movies, Movies.mock.movies)
     }
+    
+    // MARK: - Service Calls Tests (Failure)
     
     func testServiceIsCalled_whenFetchNowPlayingMoviesIsFailed() {
         // Given
@@ -108,7 +110,7 @@ final class MoviesListViewModelTests: XCTestCase {
         )
         
         // When
-        self.sut.fetchMovies { /* NOTHING TO DO HERE */ }
+        self.sut.fetchMovies()
         
         // Assert
         XCTAssertEqual(self.sut.errorMessage, ErrorMock.fakeError.localizedDescription)
@@ -124,7 +126,7 @@ final class MoviesListViewModelTests: XCTestCase {
         )
         
         // When
-        self.sut.fetchMovies { /* NOTHING TO DO HERE */ }
+        self.sut.fetchMovies()
         
         // Assert
         XCTAssertEqual(self.sut.errorMessage, ErrorMock.fakeError.localizedDescription)
@@ -140,7 +142,7 @@ final class MoviesListViewModelTests: XCTestCase {
         )
         
         // When
-        self.sut.fetchMovies { /* NOTHING TO DO HERE */ }
+        self.sut.fetchMovies()
         
         // Assert
         XCTAssertEqual(self.sut.errorMessage, ErrorMock.fakeError.localizedDescription)
@@ -156,7 +158,7 @@ final class MoviesListViewModelTests: XCTestCase {
         )
         
         // When
-        self.sut.fetchMovies { /* NOTHING TO DO HERE */ }
+        self.sut.fetchMovies()
         
         // Assert
         XCTAssertEqual(self.sut.errorMessage, ErrorMock.fakeError.localizedDescription)

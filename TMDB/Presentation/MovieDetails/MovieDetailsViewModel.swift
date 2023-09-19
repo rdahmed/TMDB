@@ -46,7 +46,7 @@ class MovieDetailsViewModel: ObservableObject {
 
 extension MovieDetailsViewModel: MovieDetailsViewModelInputProtocol {
     
-    func fetchDetails(completion: (() -> Void)?) {
+    func fetchDetails(completion: (() -> Void)? = nil) {
         self.rating = MoviesRatingsLocalStore.default.ratings[self.movieId]
         
         self.service.getDetails(self.movieId) { result in
@@ -65,7 +65,7 @@ extension MovieDetailsViewModel: MovieDetailsViewModelInputProtocol {
         }
     }
     
-    func fetchCredits(completion: (() -> Void)?) {
+    func fetchCredits(completion: (() -> Void)? = nil) {
         self.service.getCredits(self.movieId) { result in
             switch result {
             case .success(let cast):
@@ -82,7 +82,7 @@ extension MovieDetailsViewModel: MovieDetailsViewModelInputProtocol {
         }
     }
     
-    func fetchReviews(completion: (() -> Void)?) {
+    func fetchReviews(completion: (() -> Void)? = nil) {
         guard self.currentPage < self.noOfPages else { return }
         
         self.currentPage += 1
@@ -106,7 +106,7 @@ extension MovieDetailsViewModel: MovieDetailsViewModelInputProtocol {
         }
     }
     
-    func addRating(_ value: Double, completion: (() -> Void)?) {
+    func addRating(_ value: Double, completion: (() -> Void)? = nil) {
         self.service.addRating(self.movieId, value: value) { result in
             switch result {
             case .success(let added):
@@ -123,7 +123,7 @@ extension MovieDetailsViewModel: MovieDetailsViewModelInputProtocol {
         }
     }
     
-    func deleteRating(completion: (() -> Void)?) {
+    func deleteRating(completion: (() -> Void)? = nil) {
         self.service.deleteRating(self.movieId) { result in
             switch result {
             case .success(let deleted):

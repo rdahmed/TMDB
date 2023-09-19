@@ -13,6 +13,12 @@ extension MovieCast {
     }
 }
 
+extension MovieCastMember: Equatable {
+    public static func == (lhs: MovieCastMember, rhs: MovieCastMember) -> Bool {
+        lhs.name == rhs.name
+    }
+}
+
 extension MovieCastMemberDTO {
     static var mock1: MovieCastMemberDTO {
         .init(

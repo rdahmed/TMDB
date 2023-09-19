@@ -75,7 +75,7 @@ extension MoviesListViewModel: MoviesListViewModelInputProtocol {
         }
     }
     
-    func search(completion: (() -> Void)?) {
+    func search(completion: (() -> Void)? = nil) {
         self.service.search(self.searchKeyword, page: self.currentPage) { [weak self] result in
             self?.mapResult(result)
             completion?()
