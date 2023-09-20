@@ -43,6 +43,7 @@ class CategoriesMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setupAccessbility()
         self.setupLayout()
         self.setupConstraints()
         self.setupViews()
@@ -53,6 +54,11 @@ class CategoriesMenuViewController: UIViewController {
 // MARK: - UI Setup
 
 private extension CategoriesMenuViewController {
+    
+    func setupAccessbility() {
+        self.view.accessibilityIdentifier = Accessibility.CategoriesMenuIds.viewController.rawValue
+        self.tableView.accessibilityIdentifier = Accessibility.CategoriesMenuIds.tableView.rawValue
+    }
     
     func setupLayout() {
         self.view.addSubview(self.tableView)
@@ -69,6 +75,8 @@ private extension CategoriesMenuViewController {
     }
     
     func setupViews() {
+        self.view.backgroundColor = .white
+        
         self.tableView.backgroundColor = .clear
         self.tableView.separatorStyle = .none
         

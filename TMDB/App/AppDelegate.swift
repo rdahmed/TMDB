@@ -20,8 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions
         launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        if CommandLine.arguments.contains(Accessibility.appLaunchArgument.rawValue) {
+            self.resetState()
+        }
+        
         Reachability.shared.start()
         return true
+    }
+    
+    private func resetState() {
+        let defaultsName = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: defaultsName)
     }
 
     // MARK: - UISceneSession Lifecycle

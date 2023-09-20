@@ -28,6 +28,7 @@ class CategoryTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        self.setupAccessbility()
         self.setupLayout()
         self.setupConstraints()
         self.setupViews()
@@ -46,6 +47,11 @@ class CategoryTableViewCell: UITableViewCell {
 // MARK: - UI Setup
 
 private extension CategoryTableViewCell {
+    
+    func setupAccessbility() {
+        self.contentView.accessibilityIdentifier = Accessibility.CategoriesMenuIds.tableViewCell.rawValue
+        self.titleLabel.accessibilityIdentifier = Accessibility.CategoriesMenuIds.tableViewCellTitleLabel.rawValue
+    }
     
     func setupLayout() {
         self.contentView.addSubview(self.containerView)

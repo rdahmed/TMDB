@@ -59,6 +59,11 @@ class MovieCollectionViewCell: UICollectionViewCell {
 
 private extension MovieCollectionViewCell {
     
+    func setupAccessibility() {
+        self.contentView.accessibilityIdentifier = Accessibility.CategoriesMenuIds.tableViewCell.rawValue
+        self.titleLabel.accessibilityIdentifier = Accessibility.CategoriesMenuIds.tableViewCellTitleLabel.rawValue
+    }
+    
     func setupLayout() {
         self.contentViewSubviews.forEach {
             self.contentView.addSubview($0)
