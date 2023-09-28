@@ -111,6 +111,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D30A0BEE2AC5EF0900E66637 /* TMDB.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TMDB.xctestplan; sourceTree = "<group>"; };
 		D310AE272AB4645700D32B28 /* CoreDataTables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTables.swift; sourceTree = "<group>"; };
 		D310AE292AB466C500D32B28 /* MoviesLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesLocalStore.swift; sourceTree = "<group>"; };
 		D310AE2C2AB46ACE00D32B28 /* MoviesRatingsLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRatingsLocalStore.swift; sourceTree = "<group>"; };
@@ -333,6 +334,7 @@
 		D3D79A7B2A9DEA1500E5FD89 = {
 			isa = PBXGroup;
 			children = (
+				D30A0BEE2AC5EF0900E66637 /* TMDB.xctestplan */,
 				D3D79A862A9DEA1500E5FD89 /* TMDB */,
 				D3D79AA02A9DEA1800E5FD89 /* TMDBTests */,
 				D3D79AAA2A9DEA1800E5FD89 /* TMDBUITests */,
