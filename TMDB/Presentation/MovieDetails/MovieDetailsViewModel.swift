@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MovieDetailsViewModel: ObservableObject {
+class MovieDetailsViewModel {
     
     // MARK: - Dependencies
     

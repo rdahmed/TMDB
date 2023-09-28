@@ -224,14 +224,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D303EDCD2AB9CE3B00817153 /* CategoriesMenu */ = {
-			isa = PBXGroup;
-			children = (
-				D3736F412AB9B9FB006CA173 /* CategoriesMenuUITests.swift */,
-			);
-			path = CategoriesMenu;
-			sourceTree = "<group>";
-		};
 		D310AE262AB4643200D32B28 /* CoreDataManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,7 +379,7 @@
 			children = (
 				D3736F3A2AB9B02D006CA173 /* XCUIApplication+Elements.swift */,
 				D3D79AAD2A9DEA1800E5FD89 /* TMDBUITestsLaunchTests.swift */,
-				D303EDCD2AB9CE3B00817153 /* CategoriesMenu */,
+				D3736F412AB9B9FB006CA173 /* CategoriesMenuUITests.swift */,
 				D3736F382AB9ACF2006CA173 /* MoviesListUITests.swift */,
 			);
 			path = TMDBUITests;

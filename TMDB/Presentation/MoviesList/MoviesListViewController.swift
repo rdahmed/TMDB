@@ -55,6 +55,7 @@ class MoviesListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.initializeCollectionView()
         self.setupAccessbility()
         self.setupLayout()
         self.setupConstraints()
@@ -77,13 +78,16 @@ class MoviesListViewController: UIViewController {
 
 private extension MoviesListViewController {
     
+    func initializeCollectionView() {
+        self.collectionView = .init(frame: self.view.frame, collectionViewLayout: UICollectionViewFlowLayout())
+    }
+    
     func setupAccessbility() {
         self.view.accessibilityIdentifier = Accessibility.MoviesListIds.viewController.rawValue
         self.collectionView.accessibilityIdentifier = Accessibility.MoviesListIds.collectionView.rawValue
     }
     
     func setupLayout() {
-        self.collectionView = .init(frame: self.view.frame, collectionViewLayout: UICollectionViewFlowLayout())
         self.mainViewSubviews.forEach {
             self.view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false

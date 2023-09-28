@@ -38,6 +38,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        self.setupAccessibility()
         self.setupLayout()
         self.setupConstraints()
         self.setupViews()
@@ -60,8 +61,10 @@ class MovieCollectionViewCell: UICollectionViewCell {
 private extension MovieCollectionViewCell {
     
     func setupAccessibility() {
-        self.contentView.accessibilityIdentifier = Accessibility.CategoriesMenuIds.tableViewCell.rawValue
-        self.titleLabel.accessibilityIdentifier = Accessibility.CategoriesMenuIds.tableViewCellTitleLabel.rawValue
+        self.contentView.accessibilityIdentifier = Accessibility.MoviesListIds.collectionViewCell.rawValue
+        self.posterImageView.accessibilityIdentifier = Accessibility.MoviesListIds.collectionViewCellPosterImageView.rawValue
+        self.titleLabel.accessibilityIdentifier = Accessibility.MoviesListIds.collectionViewCellTitleLabel.rawValue
+        self.dateLabel.accessibilityIdentifier = Accessibility.MoviesListIds.collectionViewCellDateLabel.rawValue
     }
     
     func setupLayout() {

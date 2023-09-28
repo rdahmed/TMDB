@@ -42,7 +42,7 @@ final class CategoriesMenuUITests: XCTestCase {
         XCTAssertTrue(self.tableView.cells.count == MovieCategory.allCases.count)
     }
 
-    // MARK: - Table View Cell Tests (Appearance)
+    // MARK: - Table View Cell Tests (Updated)
 
     func test_whenPopularCellIsUpdated() {
         let cell = self.getCell(.popular)

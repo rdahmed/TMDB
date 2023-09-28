@@ -21,5 +21,12 @@ public enum Accessibility: String {
         case viewController = "moviesVC"
         case collectionView = "moviesCV"
         case collectionViewCell = "movieCVC"
+        case collectionViewCellPosterImageView = "moviesCVCPosterImageView"
+        case collectionViewCellTitleLabel = "moviesCVCTitleLabel"
+        case collectionViewCellDateLabel = "moviesCVCDateLabel"
+    }
+    
+    enum MovieDetailsIds: String {
+        case viewController = "movieDetailsVC"
     }
 }

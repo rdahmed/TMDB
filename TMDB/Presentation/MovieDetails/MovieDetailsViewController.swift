@@ -67,6 +67,7 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setupAccessbility()
         self.setupLayout()
         self.setupConstraints()
         self.setupViews()
@@ -96,6 +97,10 @@ class MovieDetailsViewController: UIViewController {
 // MARK: - UI Setup
 
 private extension MovieDetailsViewController {
+    
+    func setupAccessbility() {
+        self.view.accessibilityIdentifier = Accessibility.MovieDetailsIds.viewController.rawValue
+    }
     
     func setupLayout() {
         self.mainViewSubviews.forEach {
