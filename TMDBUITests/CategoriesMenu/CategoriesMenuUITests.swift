@@ -8,26 +8,6 @@
 import XCTest
 @testable import TMDB
 
-//final class CategoriesMenuUITests: XCTestCase {
-//
-//    var viewModel: CategoriesMenuViewModelMock!
-//    var sut: CategoriesMenuViewController!
-//
-//    override func setUp() {
-//        XCUIDevice.shared.orientation = .portrait
-//        self.continueAfterFailure = false
-//
-//        self.viewModel = .init()
-//        self.sut = .init(viewModel: self.viewModel)
-//    }
-//
-//    override func tearDown() {
-//        self.viewModel = nil
-//        self.sut = nil
-//    }
-//
-//}
-
 final class CategoriesMenuUITests: XCTestCase {
 
     var app: XCUIApplication!
@@ -64,7 +44,41 @@ final class CategoriesMenuUITests: XCTestCase {
 
     // MARK: - Table View Cell Tests (Appearance)
 
+    func test_whenPopularCellIsUpdated() {
+        let cell = self.getCell(.popular)
+        let labelText = cell?
+            .staticTexts[Accessibility.CategoriesMenuIds.tableViewCell.rawValue]
+            .label
+        XCTAssertNotNil(labelText)
+        XCTAssertEqual(labelText, MovieCategory.popular.title)
+    }
     
+    func test_whenNowPlayingCellIsUpdated() {
+        let cell = self.getCell(.nowPlaying)
+        let labelText = cell?
+            .staticTexts[Accessibility.CategoriesMenuIds.tableViewCell.rawValue]
+            .label
+        XCTAssertNotNil(labelText)
+        XCTAssertEqual(labelText, MovieCategory.nowPlaying.title)
+    }
+    
+    func test_whenUpcomingCellIsUpdated() {
+        let cell = self.getCell(.upcoming)
+        let labelText = cell?
+            .staticTexts[Accessibility.CategoriesMenuIds.tableViewCell.rawValue]
+            .label
+        XCTAssertNotNil(labelText)
+        XCTAssertEqual(labelText, MovieCategory.upcoming.title)
+    }
+    
+    func test_whenTopRatedCellIsUpdated() {
+        let cell = self.getCell(.topRated)
+        let labelText = cell?
+            .staticTexts[Accessibility.CategoriesMenuIds.tableViewCell.rawValue]
+            .label
+        XCTAssertNotNil(labelText)
+        XCTAssertEqual(labelText, MovieCategory.topRated.title)
+    }
 
     // MARK: - Table View Cell Tests (Tapped)
 
