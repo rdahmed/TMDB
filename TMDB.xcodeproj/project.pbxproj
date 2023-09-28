@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D303EDCF2AB9DA0E00817153 /* CategoryTableViewCellUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D303EDCE2AB9DA0E00817153 /* CategoryTableViewCellUITests.swift */; };
-		D303EDD32AB9E17500817153 /* CategoriesMenuViewModel+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D303EDD22AB9E17500817153 /* CategoriesMenuViewModel+Mock.swift */; };
 		D310AE282AB4645700D32B28 /* CoreDataTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310AE272AB4645700D32B28 /* CoreDataTables.swift */; };
 		D310AE2A2AB466C500D32B28 /* MoviesLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310AE292AB466C500D32B28 /* MoviesLocalStore.swift */; };
 		D310AE2D2AB46ACE00D32B28 /* MoviesRatingsLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310AE2C2AB46ACE00D32B28 /* MoviesRatingsLocalStore.swift */; };
@@ -113,8 +111,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		D303EDCE2AB9DA0E00817153 /* CategoryTableViewCellUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCellUITests.swift; sourceTree = "<group>"; };
-		D303EDD22AB9E17500817153 /* CategoriesMenuViewModel+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CategoriesMenuViewModel+Mock.swift"; sourceTree = "<group>"; };
 		D310AE272AB4645700D32B28 /* CoreDataTables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTables.swift; sourceTree = "<group>"; };
 		D310AE292AB466C500D32B28 /* MoviesLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesLocalStore.swift; sourceTree = "<group>"; };
 		D310AE2C2AB46ACE00D32B28 /* MoviesRatingsLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRatingsLocalStore.swift; sourceTree = "<group>"; };
@@ -232,17 +228,8 @@
 			isa = PBXGroup;
 			children = (
 				D3736F412AB9B9FB006CA173 /* CategoriesMenuUITests.swift */,
-				D303EDCE2AB9DA0E00817153 /* CategoryTableViewCellUITests.swift */,
 			);
 			path = CategoriesMenu;
-			sourceTree = "<group>";
-		};
-		D303EDD02AB9E0FB00817153 /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				D303EDD22AB9E17500817153 /* CategoriesMenuViewModel+Mock.swift */,
-			);
-			path = Mocks;
 			sourceTree = "<group>";
 		};
 		D310AE262AB4643200D32B28 /* CoreDataManager */ = {
@@ -400,7 +387,6 @@
 			children = (
 				D3736F3A2AB9B02D006CA173 /* XCUIApplication+Elements.swift */,
 				D3D79AAD2A9DEA1800E5FD89 /* TMDBUITestsLaunchTests.swift */,
-				D303EDD02AB9E0FB00817153 /* Mocks */,
 				D303EDCD2AB9CE3B00817153 /* CategoriesMenu */,
 				D3736F382AB9ACF2006CA173 /* MoviesListUITests.swift */,
 			);
@@ -891,8 +877,6 @@
 				D3736F3B2AB9B02D006CA173 /* XCUIApplication+Elements.swift in Sources */,
 				D3736F392AB9ACF3006CA173 /* MoviesListUITests.swift in Sources */,
 				D3D79AAE2A9DEA1800E5FD89 /* TMDBUITestsLaunchTests.swift in Sources */,
-				D303EDCF2AB9DA0E00817153 /* CategoryTableViewCellUITests.swift in Sources */,
-				D303EDD32AB9E17500817153 /* CategoriesMenuViewModel+Mock.swift in Sources */,
 				D3736F422AB9B9FB006CA173 /* CategoriesMenuUITests.swift in Sources */,
 				D3736F402AB9B821006CA173 /* Accessibility.swift in Sources */,
 			);

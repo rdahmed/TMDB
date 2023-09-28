@@ -47,7 +47,7 @@ final class CategoriesMenuUITests: XCTestCase {
     func test_whenPopularCellIsUpdated() {
         let cell = self.getCell(.popular)
         let labelText = cell?
-            .staticTexts[Accessibility.CategoriesMenuIds.tableViewCell.rawValue]
+            .staticTexts[Accessibility.CategoriesMenuIds.tableViewCellTitleLabel.rawValue]
             .label
         XCTAssertNotNil(labelText)
         XCTAssertEqual(labelText, MovieCategory.popular.title)
@@ -56,7 +56,7 @@ final class CategoriesMenuUITests: XCTestCase {
     func test_whenNowPlayingCellIsUpdated() {
         let cell = self.getCell(.nowPlaying)
         let labelText = cell?
-            .staticTexts[Accessibility.CategoriesMenuIds.tableViewCell.rawValue]
+            .staticTexts[Accessibility.CategoriesMenuIds.tableViewCellTitleLabel.rawValue]
             .label
         XCTAssertNotNil(labelText)
         XCTAssertEqual(labelText, MovieCategory.nowPlaying.title)
@@ -65,7 +65,7 @@ final class CategoriesMenuUITests: XCTestCase {
     func test_whenUpcomingCellIsUpdated() {
         let cell = self.getCell(.upcoming)
         let labelText = cell?
-            .staticTexts[Accessibility.CategoriesMenuIds.tableViewCell.rawValue]
+            .staticTexts[Accessibility.CategoriesMenuIds.tableViewCellTitleLabel.rawValue]
             .label
         XCTAssertNotNil(labelText)
         XCTAssertEqual(labelText, MovieCategory.upcoming.title)
@@ -74,7 +74,7 @@ final class CategoriesMenuUITests: XCTestCase {
     func test_whenTopRatedCellIsUpdated() {
         let cell = self.getCell(.topRated)
         let labelText = cell?
-            .staticTexts[Accessibility.CategoriesMenuIds.tableViewCell.rawValue]
+            .staticTexts[Accessibility.CategoriesMenuIds.tableViewCellTitleLabel.rawValue]
             .label
         XCTAssertNotNil(labelText)
         XCTAssertEqual(labelText, MovieCategory.topRated.title)
