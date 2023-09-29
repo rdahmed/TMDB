@@ -4,6 +4,7 @@
 //
 //  Created by Radwa Ahmed on 04/09/2023.
 //
+// Source: https://medium.com/@ahmedfathi_28486/uiactivityindicators-the-elegant-way-4faeb91f633d
 
 import UIKit
 

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreData
 
 struct Movies {
     let noOfPages: Int
