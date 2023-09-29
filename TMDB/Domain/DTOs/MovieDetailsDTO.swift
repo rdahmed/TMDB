@@ -14,14 +14,31 @@ struct MovieDetailsDTO: Decodable {
     let genres: [Genre]?
     let duration: Int
     let overview: String
-    let ratingAsAdults: Bool
     let posterPath: String?
     let backdropPath: String?
-    let noOfVotes: Int?
     let averageVote: Double?
-    let status: String?
-    let tagline: String?
-    let url: String?
+    
+    init(
+        id: Int,
+        title: String,
+        releaseDate: String,
+        genres: [Genre]?,
+        duration: Int,
+        overview: String,
+        posterPath: String?,
+        backdropPath: String?,
+        averageVote: Double?
+    ) {
+        self.id = id
+        self.title = title
+        self.releaseDate = releaseDate
+        self.genres = genres
+        self.duration = duration
+        self.overview = overview
+        self.posterPath = posterPath
+        self.backdropPath = backdropPath
+        self.averageVote = averageVote
+    }
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -30,14 +47,9 @@ struct MovieDetailsDTO: Decodable {
         case genres
         case duration = "runtime"
         case overview
-        case ratingAsAdults = "adult"
         case posterPath = "poster_path"
         case backdropPath = "backdrop_path"
-        case noOfVotes = "vote_count"
         case averageVote = "vote_average"
-        case status
-        case tagline
-        case url = "homepage"
     }
     
     init(from decoder: Decoder) throws {
@@ -49,20 +61,20 @@ struct MovieDetailsDTO: Decodable {
         self.genres = try container.decodeIfPresent([Genre].self, forKey: .genres)
         self.duration = try container.decode(Int.self, forKey: .duration)
         self.overview = try container.decode(String.self, forKey: .overview)
-        self.ratingAsAdults = try container.decode(Bool.self, forKey: .ratingAsAdults)
         self.posterPath = try container.decodeIfPresent(String.self, forKey: .posterPath)
         self.backdropPath = try container.decodeIfPresent(String.self, forKey: .backdropPath)
-        self.noOfVotes = try container.decodeIfPresent(Int.self, forKey: .noOfVotes)
         self.averageVote = try container.decodeIfPresent(Double.self, forKey: .averageVote)
-        self.status = try container.decodeIfPresent(String.self, forKey: .status)
-        self.tagline = try container.decodeIfPresent(String.self, forKey: .tagline)
-        self.url = try container.decodeIfPresent(String.self, forKey: .url)
     }
 }
 
 struct Genre: Decodable {
     let id: Int
     let name: String
+    
+    init(id: Int, name: String) {
+        self.id = id
+        self.name = name
+    }
     
     enum CodingKeys: String, CodingKey {
         case id

@@ -28,9 +28,10 @@ class CategoryTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.setupViews()
+        self.setupAccessbility()
         self.setupLayout()
         self.setupConstraints()
+        self.setupViews()
     }
     
     required init?(coder: NSCoder) {
@@ -47,16 +48,9 @@ class CategoryTableViewCell: UITableViewCell {
 
 private extension CategoryTableViewCell {
     
-    func setupViews() {
-        self.selectionStyle = .none
-        self.contentView.backgroundColor = .clear
-        
-        self.containerView.layer.cornerRadius = 8
-        self.containerView.backgroundColor = .accentColor
-        
-        self.titleLabel.textAlignment = .center
-        self.titleLabel.textColor = .primaryTintColor
-        self.titleLabel.font = .systemFont(ofSize: 20, weight: .semibold)
+    func setupAccessbility() {
+        self.contentView.accessibilityIdentifier = Accessibility.CategoriesMenuIds.TableViewCell.contentView.rawValue
+        self.titleLabel.accessibilityIdentifier = Accessibility.CategoriesMenuIds.TableViewCell.titleLabel.rawValue
     }
     
     func setupLayout() {
@@ -77,6 +71,18 @@ private extension CategoryTableViewCell {
             self.titleLabel.centerXAnchor.constraint(equalTo: self.containerView.centerXAnchor),
             self.titleLabel.centerYAnchor.constraint(equalTo: self.containerView.centerYAnchor)
         ])
+    }
+    
+    func setupViews() {
+        self.selectionStyle = .none
+        self.contentView.backgroundColor = .clear
+        
+        self.containerView.layer.cornerRadius = 8
+        self.containerView.backgroundColor = .accentColor
+        
+        self.titleLabel.textAlignment = .center
+        self.titleLabel.textColor = .white
+        self.titleLabel.font = .systemFont(ofSize: 20, weight: .semibold)
     }
     
     func updateUI(_ category: MovieCategory) {

@@ -14,11 +14,6 @@ class NetworkService: NetworkServiceProtocol {
     
     private init() {}
     static let shared: NetworkServiceProtocol = NetworkService()
-    let jsonDecoder: JSONDecoder = {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        return decoder
-    }()
         
     func request<T>(
         route: Route,
@@ -40,10 +35,13 @@ class NetworkService: NetworkServiceProtocol {
         else {
             return Fail(error: NetworkServiceError.invalidRequest).eraseToAnyPublisher()
         }
-
+        
         return URLSession.shared
             .dataTaskPublisher(for: request)
-            .map(\.data)
+            .map { [weak self] data, response in
+                self?.log(request: request, response: response, data: data)
+                return data
+            }
             .decode(type: T.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
@@ -98,7 +96,7 @@ private extension NetworkService {
 
 private extension NetworkService {
     
-    func log(request: URLRequest, response: URLResponse?, data: Data?, error: Error?) {
+    func log(request: URLRequest, response: URLResponse?, data: Data?) {
         print("=======================================================")
         print("   ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓")
         print("URL:", request.url?.absoluteString ?? .empty)
@@ -113,7 +111,6 @@ private extension NetworkService {
         if let responseJSON = prettyString(data) {
             print("Response:", responseJSON)
         }
-        error.map { print("Error:", $0) }
         print("   ⬆===⬆===⬆===⬆===⬆===⬆===⬆===⬆===⬆===⬆===⬆")
         print("======================================================\n")
     }

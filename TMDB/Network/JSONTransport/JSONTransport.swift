@@ -15,7 +15,7 @@ class JSONTransport: JSONTransportProtocol {
         route: Route,
         queryItems: QueryItems = [:],
         headers: Headers = [:]
-    ) -> MoviesPublisher<T> where T: Decodable {
+    ) -> MoviesPublisher<T> {
         self.perform(
             route: route,
             method: .get,
@@ -31,7 +31,7 @@ class JSONTransport: JSONTransportProtocol {
         queryItems: QueryItems = [:],
         headers: Headers = [:],
         params: Params = [:]
-    ) -> MoviesPublisher<T> where T: Decodable {
+    ) -> MoviesPublisher<T> {
         let body = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
         
         return self.perform(
@@ -50,7 +50,7 @@ class JSONTransport: JSONTransportProtocol {
         queryItems: QueryItems = [:],
         headers: Headers = [:],
         params: Params = [:]
-    ) -> MoviesPublisher<T> where T: Decodable {
+    ) -> MoviesPublisher<T> {
         let body = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
         
         return self.perform(
@@ -72,7 +72,7 @@ private extension JSONTransport {
         queryItems: QueryItems = [:],
         headers: Headers = [:],
         body: HTTPBody = nil
-    ) -> MoviesPublisher<T> where T: Decodable {
+    ) -> MoviesPublisher<T> {
         NetworkService.shared.request(
             route: route,
             method: method,

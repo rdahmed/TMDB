@@ -11,40 +11,30 @@ struct MovieDetails {
     let id: Int
     let title: String
     let releaseDate: String
-    let genres: [Genre]?
-    let duration: Int
+    let genres: [String]?
+    let duration: String
     let overview: String
-    let ratingAsAdults: Bool
-    let posterURL: String?
-    let backdropURL: String?
-    let noOfVotes: Int?
+    let posterURL: URL?
+    let backdropURL: URL?
     let averageVote: Double?
-    let status: String?
-    let tagline: String?
-    let url: String?
     
     init(dto: MovieDetailsDTO) {
         self.id = dto.id
         self.title = dto.title
         self.releaseDate = dto.releaseDate.formatted("YYYY-MM-dd")
-        self.genres = dto.genres
-        self.duration = dto.duration
+        self.genres = dto.genres?.map(\.name)
+        self.duration = "\(Int(dto.duration / 60))h \(dto.duration % 60)m"
         self.overview = dto.overview
-        self.ratingAsAdults = dto.ratingAsAdults
         if let posterPath = dto.posterPath {
-            self.posterURL = HTTPConfig.imageBaseURL + posterPath
+            self.posterURL = URL(string: HTTPConfig.imageBaseURL + posterPath)
         } else {
             self.posterURL = nil
         }
         if let backdropPath = dto.backdropPath {
-            self.backdropURL = HTTPConfig.imageBaseURL + backdropPath
+            self.backdropURL = URL(string: HTTPConfig.imageBaseURL + backdropPath)
         } else {
             self.backdropURL = nil
         }
-        self.noOfVotes = dto.noOfVotes
         self.averageVote = dto.averageVote
-        self.status = dto.status
-        self.tagline = dto.tagline
-        self.url = dto.url
     }
 }

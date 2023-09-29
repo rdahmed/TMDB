@@ -32,19 +32,47 @@ class MainCoordinator {
 extension MainCoordinator: CategoriesMenuRouter {
     
     func showPopularMovies() {
-        // TODO: Route to popular movies list
+        let viewModel = MoviesListViewModel(category: .popular, router: self)
+        let viewController = MoviesListViewController(viewModel: viewModel)
+        
+        self.navigationController.pushViewController(viewController, animated: true)
     }
     
     func showNowPlayingMovies() {
-        // TODO: Route to now playing movies list
+        let viewModel = MoviesListViewModel(category: .nowPlaying, router: self)
+        let viewController = MoviesListViewController(viewModel: viewModel)
+        
+        self.navigationController.pushViewController(viewController, animated: true)
     }
     
-    func showUpcomingMovies() {
-        // TODO: Route to upcoming movies list
+    func showUpcomingMovies() {let viewModel = MoviesListViewModel(category: .upcoming, router: self)
+        let viewController = MoviesListViewController(viewModel: viewModel)
+        
+        self.navigationController.pushViewController(viewController, animated: true)
     }
     
     func showTopRatedMovies() {
-        // TODO: Route to top rated movies list
+        let viewModel = MoviesListViewModel(category: .topRated, router: self)
+        let viewController = MoviesListViewController(viewModel: viewModel)
+        
+        self.navigationController.pushViewController(viewController, animated: true)
     }
     
 }
+
+// MARK: - MoviesListRouter
+
+extension MainCoordinator: MoviesListRouter {
+    
+    func showMovieDetails(_ id: Int) {
+        let viewModel = MovieDetailsViewModel(movieId: id, router: self)
+        let viewController = MovieDetailsViewController(viewModel: viewModel)
+        
+        self.navigationController.pushViewController(viewController, animated: true)
+    }
+    
+}
+
+// MARK: - MovieDetailsRouter
+
+extension MainCoordinator: MovieDetailsRouter {}
