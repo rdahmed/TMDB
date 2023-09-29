@@ -37,27 +37,3 @@ struct Movie: Codable {
         self.averageVote = dto.averageVote
     }
 }
-
-extension Movie: CoreDataModel {
-    init(managedObject: NSManagedObject) {
-        self.id = managedObject.value(forKey: "id") as? Int ?? 0
-        self.title = managedObject.value(forKey: "title") as? String ?? .empty
-        self.releaseDate = managedObject.value(forKey: "releaseDate") as? String ?? Date().formatted()
-        self.posterURL = managedObject.value(forKey: "posterURL") as? URL
-        self.averageVote = managedObject.value(forKey: "averageVote") as? Double
-    }
-    
-    func mapToManagedObject(
-        entity: NSEntityDescription,
-        insertInto: NSManagedObjectContext
-    ) -> NSManagedObject {
-        let managedObject = NSManagedObject(entity: entity, insertInto: insertInto)
-        managedObject.setValue(self.id, forKey: "id")
-        managedObject.setValue(self.title, forKey: "title")
-        managedObject.setValue(self.releaseDate, forKey: "releaseDate")
-        managedObject.setValue(self.posterURL, forKey: "posterURL")
-        managedObject.setValue(self.averageVote, forKey: "averageVote")
-        
-        return managedObject
-    }
-}
