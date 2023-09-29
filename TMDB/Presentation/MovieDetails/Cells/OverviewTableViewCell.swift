@@ -26,6 +26,7 @@ class OverviewTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        self.setupAccessbility()
         self.setupLayout()
         self.setupConstraints()
         self.setupViews()
@@ -40,6 +41,11 @@ class OverviewTableViewCell: UITableViewCell {
 // MARK: - UI Setup
 
 private extension OverviewTableViewCell {
+    
+    func setupAccessbility() {
+        self.contentView.accessibilityIdentifier = Accessibility.MovieDetailsIds.OverviewTableViewCell.contentView.rawValue
+        self.overviewLabel.accessibilityIdentifier = Accessibility.MovieDetailsIds.OverviewTableViewCell.overviewLabel.rawValue
+    }
     
     func setupLayout() {
         self.contentView.addSubview(self.overviewLabel)

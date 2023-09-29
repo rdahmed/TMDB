@@ -20,4 +20,11 @@ extension XCUIApplication {
             Accessibility.MoviesListIds.viewController.rawValue
         ].exists
     }
+    
+    var isDisplayingMovieDetails: Bool {
+        return self.otherElements[
+            Accessibility.MovieDetailsIds.viewController.rawValue
+        ].exists
+    }
+    
 }

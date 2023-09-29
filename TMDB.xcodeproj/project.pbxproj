@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D30A0BF02AC6C5DF00E66637 /* MovieDetailsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30A0BEF2AC6C5DF00E66637 /* MovieDetailsUITests.swift */; };
 		D310AE282AB4645700D32B28 /* CoreDataTables.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310AE272AB4645700D32B28 /* CoreDataTables.swift */; };
 		D310AE2A2AB466C500D32B28 /* MoviesLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310AE292AB466C500D32B28 /* MoviesLocalStore.swift */; };
 		D310AE2D2AB46ACE00D32B28 /* MoviesRatingsLocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D310AE2C2AB46ACE00D32B28 /* MoviesRatingsLocalStore.swift */; };
@@ -112,6 +113,7 @@
 
 /* Begin PBXFileReference section */
 		D30A0BEE2AC5EF0900E66637 /* TMDB.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TMDB.xctestplan; sourceTree = "<group>"; };
+		D30A0BEF2AC6C5DF00E66637 /* MovieDetailsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsUITests.swift; sourceTree = "<group>"; };
 		D310AE272AB4645700D32B28 /* CoreDataTables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTables.swift; sourceTree = "<group>"; };
 		D310AE292AB466C500D32B28 /* MoviesLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesLocalStore.swift; sourceTree = "<group>"; };
 		D310AE2C2AB46ACE00D32B28 /* MoviesRatingsLocalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRatingsLocalStore.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				D3D79AAD2A9DEA1800E5FD89 /* TMDBUITestsLaunchTests.swift */,
 				D3736F412AB9B9FB006CA173 /* CategoriesMenuUITests.swift */,
 				D3736F382AB9ACF2006CA173 /* MoviesListUITests.swift */,
+				D30A0BEF2AC6C5DF00E66637 /* MovieDetailsUITests.swift */,
 			);
 			path = TMDBUITests;
 			sourceTree = "<group>";
@@ -873,6 +876,7 @@
 				D3D79AAE2A9DEA1800E5FD89 /* TMDBUITestsLaunchTests.swift in Sources */,
 				D3736F422AB9B9FB006CA173 /* CategoriesMenuUITests.swift in Sources */,
 				D3736F402AB9B821006CA173 /* Accessibility.swift in Sources */,
+				D30A0BF02AC6C5DF00E66637 /* MovieDetailsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

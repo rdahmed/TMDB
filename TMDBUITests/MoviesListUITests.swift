@@ -30,7 +30,11 @@ final class MoviesListUITests: XCTestCase {
         self.collectionView = nil
     }
     
-    // MARK: - View Controller Tests
+}
+
+// MARK: - Tests
+
+extension MoviesListUITests {
     
     func test_whenMoviesListViewControllerIsDisplaying() {
         XCTAssertTrue(self.app.isDisplayingMoviesList)
@@ -47,14 +51,14 @@ final class MoviesListUITests: XCTestCase {
     func test_whenCellPosterImageIsUpdated() {
         let cell = self.getCell()
         let posterImage = cell?
-            .images[Accessibility.MoviesListIds.collectionViewCellPosterImageView.rawValue]
+            .images[Accessibility.MoviesListIds.CollectionViewCell.posterImageView.rawValue]
         XCTAssertNotNil(posterImage)
     }
     
     func test_whenCellTitleLabelIsUpdated() {
         let cell = self.getCell()
         let title = cell?
-            .staticTexts[Accessibility.MoviesListIds.collectionViewCellTitleLabel.rawValue]
+            .staticTexts[Accessibility.MoviesListIds.CollectionViewCell.titleLabel.rawValue]
             .label
         XCTAssertNotNil(title)
     }
@@ -62,7 +66,7 @@ final class MoviesListUITests: XCTestCase {
     func test_whenCellDateLabelIsUpdated() {
         let cell = self.getCell()
         let date = cell?
-            .staticTexts[Accessibility.MoviesListIds.collectionViewCellDateLabel.rawValue]
+            .staticTexts[Accessibility.MoviesListIds.CollectionViewCell.dateLabel.rawValue]
             .label
         XCTAssertNotNil(date)
     }
@@ -75,23 +79,27 @@ final class MoviesListUITests: XCTestCase {
         XCTAssertTrue(self.isMovieDetailsDisplayed())
     }
     
-    // MARK: - Helpers
+}
+
+// MARK: - Helpers
+
+private extension MoviesListUITests {
     
     private func navigateToMoviesList() {
+        let categoriesMenuTableView = self.app.tables[Accessibility.CategoriesMenuIds.tableView.rawValue]
         let idx = Int.random(in: 0..<MovieCategory.allCases.count)
-        let categoryCell = self.app.cells.element(boundBy: idx)
+        let categoryCell = categoriesMenuTableView.cells.element(boundBy: idx)
         categoryCell.tap()
     }
     
-    private func getCell() -> XCUIElement? {
-        let cell = self.collectionView.cells.element(
-            boundBy: 0)
+    func getCell() -> XCUIElement? {
+        let cell = self.collectionView.cells.element(boundBy: 0)
         XCTAssertNotNil(cell)
         
         return cell
     }
     
-    private func isMovieDetailsDisplayed() -> Bool {
+    func isMovieDetailsDisplayed() -> Bool {
         let moviesDetailsVC = self.app.otherElements[Accessibility.MovieDetailsIds.viewController.rawValue]
         let isMovieDetailsDisplayed = moviesDetailsVC.waitForExistence(timeout: 2)
         

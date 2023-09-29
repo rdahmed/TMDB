@@ -61,10 +61,10 @@ class MovieCollectionViewCell: UICollectionViewCell {
 private extension MovieCollectionViewCell {
     
     func setupAccessibility() {
-        self.contentView.accessibilityIdentifier = Accessibility.MoviesListIds.collectionViewCell.rawValue
-        self.posterImageView.accessibilityIdentifier = Accessibility.MoviesListIds.collectionViewCellPosterImageView.rawValue
-        self.titleLabel.accessibilityIdentifier = Accessibility.MoviesListIds.collectionViewCellTitleLabel.rawValue
-        self.dateLabel.accessibilityIdentifier = Accessibility.MoviesListIds.collectionViewCellDateLabel.rawValue
+        self.contentView.accessibilityIdentifier = Accessibility.MoviesListIds.CollectionViewCell.contentView.rawValue
+        self.posterImageView.accessibilityIdentifier = Accessibility.MoviesListIds.CollectionViewCell.posterImageView.rawValue
+        self.titleLabel.accessibilityIdentifier = Accessibility.MoviesListIds.CollectionViewCell.titleLabel.rawValue
+        self.dateLabel.accessibilityIdentifier = Accessibility.MoviesListIds.CollectionViewCell.dateLabel.rawValue
     }
     
     func setupLayout() {

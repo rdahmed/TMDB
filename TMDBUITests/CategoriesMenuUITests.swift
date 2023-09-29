@@ -29,7 +29,11 @@ final class CategoriesMenuUITests: XCTestCase {
         self.tableView = nil
     }
 
-    // MARK: - View Controller Tests
+}
+
+// MARK: - Tests
+
+extension CategoriesMenuUITests {
 
     func test_whenCategoriesMenuViewControllerIsDisplaying() {
         XCTAssertTrue(self.app.isDisplayingCategoriesMenu)
@@ -47,7 +51,7 @@ final class CategoriesMenuUITests: XCTestCase {
     func test_whenPopularCellIsUpdated() {
         let cell = self.getCell(.popular)
         let labelText = cell?
-            .staticTexts[Accessibility.CategoriesMenuIds.tableViewCellTitleLabel.rawValue]
+            .staticTexts[Accessibility.CategoriesMenuIds.TableViewCell.titleLabel.rawValue]
             .label
         XCTAssertNotNil(labelText)
         XCTAssertEqual(labelText, MovieCategory.popular.title)
@@ -56,7 +60,7 @@ final class CategoriesMenuUITests: XCTestCase {
     func test_whenNowPlayingCellIsUpdated() {
         let cell = self.getCell(.nowPlaying)
         let labelText = cell?
-            .staticTexts[Accessibility.CategoriesMenuIds.tableViewCellTitleLabel.rawValue]
+            .staticTexts[Accessibility.CategoriesMenuIds.TableViewCell.titleLabel.rawValue]
             .label
         XCTAssertNotNil(labelText)
         XCTAssertEqual(labelText, MovieCategory.nowPlaying.title)
@@ -65,7 +69,7 @@ final class CategoriesMenuUITests: XCTestCase {
     func test_whenUpcomingCellIsUpdated() {
         let cell = self.getCell(.upcoming)
         let labelText = cell?
-            .staticTexts[Accessibility.CategoriesMenuIds.tableViewCellTitleLabel.rawValue]
+            .staticTexts[Accessibility.CategoriesMenuIds.TableViewCell.titleLabel.rawValue]
             .label
         XCTAssertNotNil(labelText)
         XCTAssertEqual(labelText, MovieCategory.upcoming.title)
@@ -74,7 +78,7 @@ final class CategoriesMenuUITests: XCTestCase {
     func test_whenTopRatedCellIsUpdated() {
         let cell = self.getCell(.topRated)
         let labelText = cell?
-            .staticTexts[Accessibility.CategoriesMenuIds.tableViewCellTitleLabel.rawValue]
+            .staticTexts[Accessibility.CategoriesMenuIds.TableViewCell.titleLabel.rawValue]
             .label
         XCTAssertNotNil(labelText)
         XCTAssertEqual(labelText, MovieCategory.topRated.title)
@@ -101,15 +105,19 @@ final class CategoriesMenuUITests: XCTestCase {
         self.tapCategoryCell(.topRated)
         XCTAssertTrue(self.isMoviesListDisplayed())
     }
+    
+}
 
-    // MARK: - Helpers
+// MARK: - Helpers
 
-    private func tapCategoryCell(_ category: MovieCategory) {
+private extension CategoriesMenuUITests {
+    
+    func tapCategoryCell(_ category: MovieCategory) {
         let cell = self.getCell(category)
         cell?.tap()
     }
-
-    private func getCell(_ category: MovieCategory) -> XCUIElement? {
+    
+    func getCell(_ category: MovieCategory) -> XCUIElement? {
         guard
             let idx = MovieCategory.allCases.firstIndex(of: category)
         else { return nil }
@@ -120,11 +128,11 @@ final class CategoriesMenuUITests: XCTestCase {
         return cell
     }
 
-    private func isMoviesListDisplayed() -> Bool {
+    func isMoviesListDisplayed() -> Bool {
         let moviesListVC = self.app.otherElements[Accessibility.MoviesListIds.viewController.rawValue]
         let isMoviesListDisplayed = moviesListVC.waitForExistence(timeout: 2)
 
         return isMoviesListDisplayed
     }
-
+    
 }

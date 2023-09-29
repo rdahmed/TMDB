@@ -100,6 +100,8 @@ private extension MovieDetailsViewController {
     
     func setupAccessbility() {
         self.view.accessibilityIdentifier = Accessibility.MovieDetailsIds.viewController.rawValue
+        self.ratingView.accessibilityIdentifier = Accessibility.MovieDetailsIds.ratingView.rawValue
+        self.tableView.accessibilityIdentifier = Accessibility.MovieDetailsIds.tableView.rawValue
     }
     
     func setupLayout() {

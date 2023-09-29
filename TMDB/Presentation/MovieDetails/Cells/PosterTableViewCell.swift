@@ -56,6 +56,7 @@ class PosterTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        self.setupAccessbility()
         self.setupLayout()
         self.setupConstraints()
         self.setupViews()
@@ -77,6 +78,16 @@ class PosterTableViewCell: UITableViewCell {
 // MARK: - UI Setup
 
 private extension PosterTableViewCell {
+    
+    func setupAccessbility() {
+        self.contentView.accessibilityIdentifier = Accessibility.MovieDetailsIds.PosterTableViewCell.contentView.rawValue
+        self.backdropImageView.accessibilityIdentifier = Accessibility.MovieDetailsIds.PosterTableViewCell.backdropImageView.rawValue
+        self.posterImageView.accessibilityIdentifier = Accessibility.MovieDetailsIds.PosterTableViewCell.posterImageView.rawValue
+        self.titleLabel.accessibilityIdentifier = Accessibility.MovieDetailsIds.PosterTableViewCell.titleLabel.rawValue
+        self.detailsLabel.accessibilityIdentifier = Accessibility.MovieDetailsIds.PosterTableViewCell.detailsLabel.rawValue
+        self.userScoreLabel.accessibilityIdentifier = Accessibility.MovieDetailsIds.PosterTableViewCell.userScoreLabel.rawValue
+        self.ratingButton.accessibilityIdentifier = Accessibility.MovieDetailsIds.PosterTableViewCell.ratingButton.rawValue
+    }
     
     func setupLayout() {
         self.contentViewSubviews.forEach {

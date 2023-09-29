@@ -49,8 +49,8 @@ class CategoryTableViewCell: UITableViewCell {
 private extension CategoryTableViewCell {
     
     func setupAccessbility() {
-        self.contentView.accessibilityIdentifier = Accessibility.CategoriesMenuIds.tableViewCell.rawValue
-        self.titleLabel.accessibilityIdentifier = Accessibility.CategoriesMenuIds.tableViewCellTitleLabel.rawValue
+        self.contentView.accessibilityIdentifier = Accessibility.CategoriesMenuIds.TableViewCell.contentView.rawValue
+        self.titleLabel.accessibilityIdentifier = Accessibility.CategoriesMenuIds.TableViewCell.titleLabel.rawValue
     }
     
     func setupLayout() {

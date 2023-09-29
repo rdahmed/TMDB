@@ -13,20 +13,43 @@ public enum Accessibility: String {
     enum CategoriesMenuIds: String {
         case viewController = "categoriesVC"
         case tableView = "categoriesTV"
-        case tableViewCell = "categoryTVC"
-        case tableViewCellTitleLabel = "categoryTVCTitleLabel"
+        
+        enum TableViewCell: String {
+            case contentView = "categoryTVC"
+            case titleLabel = "categoryTVCTitleLabel"
+        }
     }
     
     enum MoviesListIds: String {
         case viewController = "moviesVC"
         case collectionView = "moviesCV"
-        case collectionViewCell = "movieCVC"
-        case collectionViewCellPosterImageView = "moviesCVCPosterImageView"
-        case collectionViewCellTitleLabel = "moviesCVCTitleLabel"
-        case collectionViewCellDateLabel = "moviesCVCDateLabel"
+        
+        enum CollectionViewCell: String {
+            case contentView = "movieCVC"
+            case posterImageView = "moviesCVCPosterImageView"
+            case titleLabel = "moviesCVCTitleLabel"
+            case dateLabel = "moviesCVCDateLabel"
+        }
     }
     
     enum MovieDetailsIds: String {
         case viewController = "movieDetailsVC"
+        case ratingView = "movieDetailsRatingView"
+        case tableView = "movieDetailsTV"
+        
+        enum PosterTableViewCell: String {
+            case contentView = "movieDetailsPosterTVC"
+            case backdropImageView = "movieDetailsPosterTVCBackdropImageView"
+            case posterImageView = "movieDetailsPosterTVCPosterImageView"
+            case titleLabel = "movieDetailsPosterTVCTitleLabel"
+            case detailsLabel = "movieDetailsPosterTVCDetailsLabel"
+            case userScoreLabel = "movieDetailsPosterTVCUserScoreLabel"
+            case ratingButton = "movieDetailsPosterTVCRatingButton"
+        }
+        
+        enum OverviewTableViewCell: String {
+            case contentView = "movieDetailsOverviewTVC"
+            case overviewLabel = "movieDetailsOverviewTVCOverviewLabel"
+        }
     }
 }
