@@ -89,6 +89,7 @@
 		D3F629D32AAB616600892AD6 /* CastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F629D22AAB616600892AD6 /* CastTableViewCell.swift */; };
 		D3F629D52AAB64A300892AD6 /* CastMemberCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F629D42AAB64A300892AD6 /* CastMemberCollectionViewCell.swift */; };
 		D3F629D72AAF0C4B00892AD6 /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F629D62AAF0C4B00892AD6 /* ReviewTableViewCell.swift */; };
+		DE88C5D42ACAE95600E50EE5 /* BaseUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE88C5D32ACAE95600E50EE5 /* BaseUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,6 +195,7 @@
 		D3F629D22AAB616600892AD6 /* CastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastTableViewCell.swift; sourceTree = "<group>"; };
 		D3F629D42AAB64A300892AD6 /* CastMemberCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastMemberCollectionViewCell.swift; sourceTree = "<group>"; };
 		D3F629D62AAF0C4B00892AD6 /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
+		DE88C5D32ACAE95600E50EE5 /* BaseUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -405,6 +407,7 @@
 		D3D79ABE2A9DEE5800E5FD89 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				DE88C5D22ACAE93300E50EE5 /* Base */,
 				D3B187A52AA6374600A56765 /* Spinner */,
 				D3D79ADF2A9E082F00E5FD89 /* Extensions */,
 			);
@@ -632,6 +635,14 @@
 			path = CastTableViewCell;
 			sourceTree = "<group>";
 		};
+		DE88C5D22ACAE93300E50EE5 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				DE88C5D32ACAE95600E50EE5 /* BaseUIView.swift */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -772,6 +783,7 @@
 				D334B8362AA9E19100DFBB75 /* MovieDetailsViewModel.swift in Sources */,
 				D3D79B242AA0CFD400E5FD89 /* CategoriesMenuViewController.swift in Sources */,
 				D3D79AE92A9E309700E5FD89 /* Movies.swift in Sources */,
+				DE88C5D42ACAE95600E50EE5 /* BaseUIView.swift in Sources */,
 				D3D79AED2A9F816000E5FD89 /* MovieDetails.swift in Sources */,
 				D3D79AFF2AA0A7C900E5FD89 /* MoviesService.swift in Sources */,
 				D3D79AC62A9DF97200E5FD89 /* Route.swift in Sources */,
@@ -1018,6 +1030,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1049,6 +1062,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

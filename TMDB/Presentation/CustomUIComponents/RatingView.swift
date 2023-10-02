@@ -11,7 +11,7 @@ protocol RatingViewDelegate: AnyObject {
     func dimissRatingView(_ rating: Double?)
 }
 
-class RatingView: UIView {
+class RatingView: BaseUIView {
     
     private enum Constants {
         static let starHeight: CGFloat = 60
@@ -56,16 +56,10 @@ class RatingView: UIView {
     
     // MARK: - Initializers
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+    override func initializer() {
         self.setupLayout()
         self.setupConstraints()
         self.setupViews()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
 }
