@@ -7,7 +7,7 @@
 
 import UIKit
 
-class UserScoreView: UIView {
+class UserScoreView: BaseUIView {
     
     // MARK: - Dependencies
     
@@ -30,16 +30,10 @@ class UserScoreView: UIView {
     
     // MARK: - Initializers
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
+    override func initializer() {
         self.setupLayout()
         self.setupConstraints()
         self.setupViews()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
 }
